@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="MediaInventory.UserControls.MaskedTextBoxWithHeader"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MediaInventory.UserControls">
+
+    <DockPanel HorizontalAlignment="Stretch" LastChildFill="True">
+        <Border x:Name="HeaderBorder" DockPanel.Dock="Left" Padding="5, 0">
+            <TextBlock x:Name="Header" Margin="0" />
+        </Border>
+        <Border x:Name="ContentBorder" DockPanel.Dock="Left" BorderBrush="Transparent" BorderThickness="1">
+            <wpfx:MaskedTextBox x:Name="Content" Background="Transparent" BorderThickness="0" HorizontalAlignment="Stretch" Margin="0" Padding="5, 0" GotFocus="OnTextBoxGofFocus" LostFocus="OnTextBoxLostFocus" />
+        </Border>
+    </DockPanel>
+</UserControl>

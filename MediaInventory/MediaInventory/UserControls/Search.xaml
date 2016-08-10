@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="MediaInventory.UserControls.Search"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:resources="clr-namespace:MediaInventory.Resources"
+                xmlns:search="clr-namespace:MediaInventory.UserControls"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                x:Name="search">
+
+    <DockPanel LastChildFill="True">
+        <TabControl DockPanel.Dock="Top" Background="#FF373737" BorderBrush="#FF505050" BorderThickness="0, 1, 0, 0">
+            <TabItem Header="Movies" Margin="1, 0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                     IsSelected="{Binding ElementName=search, Path=InventoryType, Converter={StaticResource InventoryTypeToIsCheckedConverter}, ConverterParameter={x:Static resources:InventoryTypes.Movies}}">
+                <TabItem.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform />
+                        <SkewTransform />
+                        <RotateTransform />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </TabItem.RenderTransform>
+                <DockPanel LastChildFill="True" Background="#FF373737">
+                    <search:SearchMovies x:Name="searchMovies" DockPanel.Dock="Top" Margin="0" />
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Music" Margin="1, 0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                     IsSelected="{Binding ElementName=search, Path=InventoryType, Converter={StaticResource InventoryTypeToIsCheckedConverter}, ConverterParameter={x:Static resources:InventoryTypes.Music}}">
+                <TabItem.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform />
+                        <SkewTransform />
+                        <RotateTransform />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </TabItem.RenderTransform>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Search Music Coming Soon!!" FontWeight="Bold" FontSize="24" />
+            </TabItem>
+            <TabItem Header="Books" Margin="1, 0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                     IsSelected="{Binding ElementName=search, Path=InventoryType, Converter={StaticResource InventoryTypeToIsCheckedConverter}, ConverterParameter={x:Static resources:InventoryTypes.Books}}">
+                <TabItem.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform />
+                        <SkewTransform />
+                        <RotateTransform />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </TabItem.RenderTransform>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Search Books Coming Soon!!" FontWeight="Bold" FontSize="24" />
+            </TabItem>
+            <TabItem Header="Customers" Margin="1, 0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                     IsSelected="{Binding ElementName=search, Path=InventoryType, Converter={StaticResource InventoryTypeToIsCheckedConverter}, ConverterParameter={x:Static resources:InventoryTypes.Customers}}">
+                <TabItem.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform />
+                        <SkewTransform />
+                        <RotateTransform />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </TabItem.RenderTransform>
+                <DockPanel LastChildFill="True" Background="#FF373737" VerticalAlignment="Top">
+                    <search:SearchCustomers x:Name="searchCustomers" DockPanel.Dock="Top" Margin="0" />
+                </DockPanel>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</UserControl>

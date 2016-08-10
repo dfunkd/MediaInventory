@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="MediaInventory.UserControls.Login"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:cc="clr-namespace:MediaInventory.CustomControls"
+             xmlns:uc="clr-namespace:MediaInventory.UserControls"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Loaded="UserControl_Loaded"
+             HorizontalAlignment="Center"
+             VerticalAlignment="Center">
+
+    <DockPanel LastChildFill="False">
+        <Image DockPanel.Dock="Top" Height="128" Source="/MediaInventory;component/Resources/Images/allMedia.png" />
+        <TextBlock DockPanel.Dock="Top" FontWeight="Bold" FontSize="16" Foreground="White" HorizontalAlignment="Center" Text="ThreeMPtree Inventory" />
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Login" Style="{DynamicResource NormalExpandingButtonStyle}" IsDefault="True" Command="uc:Login.InventoryLogin">
+                <Button.CommandBindings>
+                    <CommandBinding Command="uc:Login.InventoryLogin" CanExecute="CanInventoryLogin" Executed="InventoryLoginExecuted" />
+                </Button.CommandBindings>
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <Button Content="Cancel" Style="{DynamicResource CancelExpandingButtonStyle}" IsCancel="True" Command="uc:Login.CancelLogin">
+                <Button.CommandBindings>
+                    <CommandBinding Command="uc:Login.CancelLogin" CanExecute="CanCancelLogin" Executed="CancelLoginExecuted" />
+                </Button.CommandBindings>
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+        </StackPanel>
+        <uc:AnimatedWatermarkTextBox x:Name="txtLogin" DockPanel.Dock="Top" HeaderText="Login..." HorizontalAlignment="Stretch" Margin="5" />
+        <uc:AnimatedWatermarkPasswordBox x:Name="pwbPassword" DockPanel.Dock="Top" HeaderText="Password..." HorizontalAlignment="Stretch" Margin="5" />
+        <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch">
+            <Button DockPanel.Dock="Left" Content="Forgot Login" Margin="10, 0" HorizontalAlignment="Left" Style="{DynamicResource LinkButton}" Command="uc:Login.ForgotLogin">
+                <Button.CommandBindings>
+                    <CommandBinding Command="uc:Login.ForgotLogin" CanExecute="CanForgotLogin" Executed="ForgotLoginExecuted" />
+                </Button.CommandBindings>
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <Button DockPanel.Dock="Right" Content="Forgot Password" Margin="10, 0" HorizontalAlignment="Right" Style="{DynamicResource LinkButton}" Command="uc:Login.ForgotPassword">
+                <Button.CommandBindings>
+                    <CommandBinding Command="uc:Login.ForgotPassword" CanExecute="CanForgotPassword" Executed="ForgotPasswordExecuted" />
+                </Button.CommandBindings>
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+        </DockPanel>
+        <cc:HeaderContentControl x:Name="hccInvalidLogin" Style="{DynamicResource InvalidLoginHeaderContentControl}" DockPanel.Dock="Top" Header="Invalid Login" HorizontalAlignment="Stretch" Margin="5" Visibility="Hidden" />
+    </DockPanel>
+</UserControl>

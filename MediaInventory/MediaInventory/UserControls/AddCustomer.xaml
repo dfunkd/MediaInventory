@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="MediaInventory.UserControls.AddCustomer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:local="clr-namespace:MediaInventory.UserControls"
+             xmlns:search="clr-namespace:MediaInventory.UserControls"
+             xmlns:uc="clr-namespace:MediaInventory.UserControls"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             HorizontalAlignment="Center" VerticalAlignment="Center">
+
+    <DockPanel LastChildFill="False" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <search:SearchCustomers x:Name="searchCustomers" DockPanel.Dock="Top" Margin="0" />
+        <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Center">
+            <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                <uc:AnimatedWatermarkTextBox x:Name="txtFirstName" HeaderText="First Name" HorizontalAlignment="Left" Margin="5" Width="200" />
+                <uc:AnimatedWatermarkTextBox x:Name="txtLastName" HeaderText="Last Name" HorizontalAlignment="Left" Margin="5" Width="200" />
+            </StackPanel>
+            <uc:AnimatedWatermarkTextBox x:Name="txtAddress1" DockPanel.Dock="Top" HeaderText="Address" HorizontalAlignment="Left" Margin="5" Width="410" />
+            <uc:AnimatedWatermarkTextBox x:Name="txtAddress2" DockPanel.Dock="Top" HeaderText="Apartment / Suite" HorizontalAlignment="Left" Margin="5" Width="410" />
+            <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                <uc:AnimatedWatermarkTextBox x:Name="txtCity" HeaderText="City" HorizontalAlignment="Left" Margin="5" Width="265" />
+                <ComboBox x:Name="cboState" Margin="5" Width="50" />
+                <uc:AnimatedWatermarkTextBox x:Name="txtZip" HeaderText="Zip Code" HorizontalAlignment="Left" Margin="5" Width="75" />
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                <uc:AnimatedWatermarkTextBox x:Name="txtHomePhone" HeaderText="Home Phone" HorizontalAlignment="Left" Margin="5" Width="200" />
+                <uc:AnimatedWatermarkTextBox x:Name="txtCellPhone" HeaderText="Cell Phone" HorizontalAlignment="Left" Margin="5" Width="200" />
+            </StackPanel>
+            <uc:AnimatedWatermarkTextBox x:Name="txtEmail" DockPanel.Dock="Top" HeaderText="Email Address" HorizontalAlignment="Left" Margin="5" Width="410" />
+            <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button Content="Save" Margin="5" Style="{DynamicResource NormalExpandingButtonStyle}" IsDefault="True">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                </Button>
+                <Button Content="Cancel" Margin="5" Style="{DynamicResource CancelExpandingButtonStyle}" IsCancel="True">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                </Button>
+            </StackPanel>
+        </DockPanel>
+    </DockPanel>
+</UserControl>

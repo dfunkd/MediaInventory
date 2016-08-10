@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="MediaInventory.UserControls.Edit"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:resources="clr-namespace:MediaInventory.Resources"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                x:Name="edit">
+
+    <DockPanel LastChildFill="True">
+        <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Center" Orientation="Horizontal">
+            <ToggleButton Content="Movies" IsChecked="{Binding ElementName=edit, Path=InventoryType, Converter={StaticResource InventoryTypeToIsCheckedConverter}, ConverterParameter={x:Static resources:InventoryTypes.Movies}}">
+                <ToggleButton.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ToggleButton.RenderTransform>
+            </ToggleButton>
+            <ToggleButton Content="Music" IsChecked="{Binding ElementName=edit, Path=InventoryType, Converter={StaticResource InventoryTypeToIsCheckedConverter}, ConverterParameter={x:Static resources:InventoryTypes.Music}}"
+                          ToolTip="Coming soon!!">
+                <ToggleButton.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ToggleButton.RenderTransform>
+            </ToggleButton>
+            <ToggleButton Content="Books" IsChecked="{Binding ElementName=edit, Path=InventoryType, Converter={StaticResource InventoryTypeToIsCheckedConverter}, ConverterParameter={x:Static resources:InventoryTypes.Books}}"
+                          ToolTip="Coming soon!!">
+                <ToggleButton.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ToggleButton.RenderTransform>
+            </ToggleButton>
+            <ToggleButton Content="Customers" IsChecked="{Binding ElementName=edit, Path=InventoryType, Converter={StaticResource InventoryTypeToIsCheckedConverter}, ConverterParameter={x:Static resources:InventoryTypes.Customers}}">
+                <ToggleButton.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ToggleButton.RenderTransform>
+            </ToggleButton>
+        </StackPanel>
+        <ContentControl x:Name="ccEdit" DockPanel.Dock="Top" />
+    </DockPanel>
+</UserControl>

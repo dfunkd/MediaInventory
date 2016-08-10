@@ -1,0 +1,125 @@
+﻿<UserControl x:Class="MediaInventory.UserControls.SearchCustomers"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:local="clr-namespace:MediaInventory.UserControls"
+             xmlns:uc="clr-namespace:MediaInventory.UserControls"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Focusable="True"
+             IsTabStop="True"
+             Loaded="searchCustomers_Loaded"
+             x:Name="searchCustomers">
+
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="cvsCheckOutHistory" />
+        <ContextMenu x:Key="CheckOutHistoryContextMenu" Background="#FF373737" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+            <MenuItem Header="Check In" Style="{DynamicResource NormalExpandingMenuItemStyle}">
+                <MenuItem.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </MenuItem.RenderTransform>
+            </MenuItem>
+        </ContextMenu>
+    </UserControl.Resources>
+
+    <DockPanel Margin="5, 0, 5, 5" LastChildFill="True" HorizontalAlignment="Stretch">
+        <uc:AnimatedWatermarkTextBox x:Name="txtSearchCriteria" DockPanel.Dock="Top" Margin="5" HeaderText="Search Customers..." />
+        <DataGrid x:Name="dgCustomers" DockPanel.Dock="Top" Margin="5" MaxHeight="500" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False"
+                  RowHeaderWidth="0" SelectionChanged="dgCustomers_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding ElementName=searchCustomers, Path=Customers}" AlternatingRowBackground="#FF5A7BAD"
+                  DataContext="{Binding RelativeSource={RelativeSource Self}}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title" Width="*" Binding="{Binding Path=FullName, Mode=OneWay}" />
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <DockPanel LastChildFill="True">
+                        <DockPanel DockPanel.Dock="Left" HorizontalAlignment="Center" LastChildFill="False">
+                            <DockPanel DockPanel.Dock="Top" LastChildFill="False">
+                                <TextBlock DockPanel.Dock="Left" Foreground="White" Margin="5, 0" FontWeight="Bold">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0}, {1}">
+                                            <Binding Path="LastName" Mode="OneWay" />
+                                            <Binding Path="FirstName" Mode="OneWay" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Top" LastChildFill="False">
+                                <TextBlock DockPanel.Dock="Left" Foreground="White" Margin="5, 0" Text="{Binding AddressLine1, Mode=OneWay}" Visibility="{Binding AddressLine1, Converter={StaticResource EmptyStringToCollapsedConverter}}" />
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Top" LastChildFill="False">
+                                <TextBlock DockPanel.Dock="Left" Foreground="White" Margin="5, 0" Text="{Binding AddressLine2, Mode=OneWay}" Visibility="{Binding AddressLine2, Converter={StaticResource EmptyStringToCollapsedConverter}}" />
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Top" LastChildFill="False">
+                                <TextBlock DockPanel.Dock="Left" Foreground="White" Margin="5, 0">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0}, {1} {2}">
+                                            <Binding Path="City" Mode="OneWay" />
+                                            <Binding Path="State.Abbreviation" Mode="OneWay" />
+                                            <Binding Path="ZipCode" Mode="OneWay" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Top" LastChildFill="False">
+                                <TextBlock DockPanel.Dock="Left" Foreground="White" Margin="5, 0" Text="{Binding EmailAddress, Mode=OneWay}" />
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Top" LastChildFill="False">
+                                <TextBlock DockPanel.Dock="Left" Foreground="White" Margin="5, 0" Text="{Binding CellPhone, Mode=OneWay, StringFormat={}(C) {0}}" />
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Top" LastChildFill="False">
+                                <TextBlock DockPanel.Dock="Left" Foreground="White" Margin="5, 0" Text="{Binding HomePhone, Mode=OneWay, StringFormat={}(H) {0}}" />
+                            </DockPanel>
+                        </DockPanel>
+                        <DataGrid DockPanel.Dock="Top" Margin="5" MaxHeight="500" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False"
+                                  RowHeaderWidth="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding Path=CheckOutHistories}" AlternatingRowBackground="#FF5A7BAD" RowBackground="#FF7C96BE"
+                                  PreviewMouseRightButtonDown="DataGrid_PreviewMouseRightButtonDown" SelectionChanged="OnCheckOutHistorySelectionChanged">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Title" Width="*" Binding="{Binding Path=Movie.Name}" />
+                                <DataGridTextColumn Header="Check Out Date" Binding="{Binding Path=CheckOutDate, Converter={StaticResource DateTimeToDateAndTimeOrNullConverter}}" />
+                                <DataGridTextColumn Header="Check In Date" Binding="{Binding Path=CheckInDate, Converter={StaticResource DateTimeToDateAndTimeOrNullConverter}}" />
+                                <DataGridTemplateColumn Header="Check In Date">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid HorizontalAlignment="Stretch" Margin="0">
+                                                <TextBlock Text="{Binding Path=CheckInDate, Converter={StaticResource DateTimeToDateAndTimeOrNullConverter}}" Visibility="{Binding Path=CheckInDate, Converter={StaticResource StringContentToVisibilityConverter}}" />
+                                                <Button Content="Check In" HorizontalAlignment="Stretch" Style="{DynamicResource CancelExpandingButtonStyle}" Visibility="{Binding Path=CheckInDate, Converter={StaticResource NullToCollapsedConverter}}" Click="OnCheckInClick">
+                                                    <!--<Button.CommandBindings>
+                                                        <CommandBinding Command="local:SearchCustomers.CheckIn" CanExecute="CanCheckIn" Executed="CheckInExecuted" />
+                                                    </Button.CommandBindings>-->
+                                                    <Button.RenderTransform>
+                                                        <TransformGroup>
+                                                            <ScaleTransform/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform/>
+                                                        </TransformGroup>
+                                                    </Button.RenderTransform>
+                                                </Button>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                            <!--<DataGrid.RowStyle>
+                                <Style TargetType="{x:Type DataGridRow}">
+                                    <Setter Property="Background" Value="{Binding Movie.IsCheckedOut, Converter={StaticResource IsCheckedOutToRowColorConverter}}" />
+                                    <Setter Property="Foreground" Value="White" />
+                                    <Setter Property="ContextMenu" Value="{StaticResource CheckOutHistoryContextMenu}" />
+                                </Style>
+                            </DataGrid.RowStyle>-->
+                        </DataGrid>
+                    </DockPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+            <DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Setter Property="Background" Value="#FF46638E" />
+                    <Setter Property="Foreground" Value="White" />
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+    </DockPanel>
+</UserControl>

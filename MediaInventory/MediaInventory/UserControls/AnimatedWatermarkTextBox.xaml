@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="MediaInventory.UserControls.AnimatedWatermarkTextBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MediaInventory.UserControls"
+             x:Name="animatedWatermarkTextBox">
+
+    <Grid DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
+        <TextBlock x:Name="tbHeader" FontStyle="Italic" Margin="5, 0, 0, 0" FontWeight="Bold" Padding="5" VerticalAlignment="Center" Text="{Binding ElementName=animatedWatermarkTextBox, Path=HeaderText}"
+                   Foreground="{Binding ElementName=animatedWatermarkTextBox, Path=HeaderForeground}">
+            <TextBlock.RenderTransform>
+                <TranslateTransform />
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBox x:Name="txtContent" Background="Transparent" BorderBrush="{Binding ElementName=animatedWatermarkTextBox, Path=ContentBorderBrush}" HorizontalAlignment="Stretch" Margin="5" GotFocus="OnTextBoxGofFocus" LostFocus="OnTextBoxLostFocus" TextChanged="OnTextBoxTextChanged">
+            <TextBox.Style>
+                <Style TargetType="{x:Type TextBox}">
+                    <Setter Property="Background" Value="{Binding ElementName=animatedWatermarkTextBox, Path=ContentSemiTransparentBackground}" />
+                </Style>
+            </TextBox.Style>
+            <TextBox.Triggers>
+                <EventTrigger RoutedEvent="TextBox.GotFocus">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="{Binding ElementName=animatedWatermarkTextBox, Path=ContentBackground.Color}" Storyboard.TargetProperty="(TextBox.Background).(SolidColorBrush.Color)" FillBehavior="HoldEnd" Duration="0:0:0.5" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="TextBox.LostFocus">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="{Binding ElementName=animatedWatermarkTextBox, Path=ContentSemiTransparentBackground.Color}" Storyboard.TargetProperty="(TextBox.Background).(SolidColorBrush.Color)" FillBehavior="HoldEnd" Duration="0:0:0.5" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBox.Triggers>
+        </TextBox>
+    </Grid>
+</UserControl>

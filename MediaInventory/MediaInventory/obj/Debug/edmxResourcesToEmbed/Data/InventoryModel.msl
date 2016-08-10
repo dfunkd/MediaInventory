@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InventoryModelStoreContainer" CdmEntityContainer="InventoryEntities">
+    <EntitySetMapping Name="CheckOutHistories">
+      <EntityTypeMapping TypeName="InventoryModel.CheckOutHistory">
+        <MappingFragment StoreEntitySet="CheckOutHistory">
+          <ScalarProperty Name="Id" ColumnName="cohId" />
+          <ScalarProperty Name="MOVid" ColumnName="cohMOVid" />
+          <ScalarProperty Name="CSTid" ColumnName="cohCSTid" />
+          <ScalarProperty Name="CheckOutDate" ColumnName="cohCheckOutDate" />
+          <ScalarProperty Name="CheckInDate" ColumnName="cohCheckInDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="InventoryModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="Id" ColumnName="cstId" />
+          <ScalarProperty Name="FirstName" ColumnName="cstFirstName" />
+          <ScalarProperty Name="LastName" ColumnName="cstLastName" />
+          <ScalarProperty Name="AddressLine1" ColumnName="cstAddressLine1" />
+          <ScalarProperty Name="AddressLine2" ColumnName="cstAddressLine2" />
+          <ScalarProperty Name="City" ColumnName="cstCity" />
+          <ScalarProperty Name="STAid" ColumnName="cstSTAid" />
+          <ScalarProperty Name="ZipCode" ColumnName="cstZipCode" />
+          <ScalarProperty Name="CellPhone" ColumnName="cstCellPhone" />
+          <ScalarProperty Name="HomePhone" ColumnName="cstHomePhone" />
+          <ScalarProperty Name="EmailAddress" ColumnName="cstEmailAddress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Formats">
+      <EntityTypeMapping TypeName="InventoryModel.Format">
+        <MappingFragment StoreEntitySet="Format">
+          <ScalarProperty Name="Id" ColumnName="forId" />
+          <ScalarProperty Name="Name" ColumnName="forName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InventoryUsers">
+      <EntityTypeMapping TypeName="InventoryModel.InventoryUser">
+        <MappingFragment StoreEntitySet="InventoryUser">
+          <ScalarProperty Name="Id" ColumnName="useId" />
+          <ScalarProperty Name="Login" ColumnName="useLogin" />
+          <ScalarProperty Name="Password" ColumnName="usePassword" />
+          <ScalarProperty Name="FirstName" ColumnName="useFirstName" />
+          <ScalarProperty Name="LastName" ColumnName="useLastName" />
+          <ScalarProperty Name="Email" ColumnName="useEmail" />
+          <ScalarProperty Name="CellPhone" ColumnName="useCellPhone" />
+          <ScalarProperty Name="SQ1id" ColumnName="useSQ1id" />
+          <ScalarProperty Name="SQ2id" ColumnName="useSQ2id" />
+          <ScalarProperty Name="SQ3id" ColumnName="useSQ3id" />
+          <ScalarProperty Name="Answer1" ColumnName="useAnswer1" />
+          <ScalarProperty Name="Answer2" ColumnName="useAnswer2" />
+          <ScalarProperty Name="Answer3" ColumnName="useAnswer3" />
+          <ScalarProperty Name="ROLid" ColumnName="useROLid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movies">
+      <EntityTypeMapping TypeName="InventoryModel.Movie">
+        <MappingFragment StoreEntitySet="Movie">
+          <ScalarProperty Name="Id" ColumnName="movId" />
+          <ScalarProperty Name="Name" ColumnName="movName" />
+          <ScalarProperty Name="TMDbId" ColumnName="movTMDbId" />
+          <ScalarProperty Name="IMDbId" ColumnName="movIMDbId" />
+          <ScalarProperty Name="IsOwned" ColumnName="movIsOwned" />
+          <ScalarProperty Name="IsWanted" ColumnName="movIsWanted" />
+          <ScalarProperty Name="FORId" ColumnName="movFORId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SecurityQuestions">
+      <EntityTypeMapping TypeName="InventoryModel.SecurityQuestion">
+        <MappingFragment StoreEntitySet="SecurityQuestion">
+          <ScalarProperty Name="Id" ColumnName="seqId" />
+          <ScalarProperty Name="Question" ColumnName="seqQuestion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SecurityRoles">
+      <EntityTypeMapping TypeName="InventoryModel.SecurityRole">
+        <MappingFragment StoreEntitySet="SecurityRole">
+          <ScalarProperty Name="Id" ColumnName="rolId" />
+          <ScalarProperty Name="Role" ColumnName="rolRole" />
+          <ScalarProperty Name="Description" ColumnName="rolDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="States">
+      <EntityTypeMapping TypeName="InventoryModel.State">
+        <MappingFragment StoreEntitySet="State">
+          <ScalarProperty Name="Id" ColumnName="staId" />
+          <ScalarProperty Name="Name" ColumnName="staName" />
+          <ScalarProperty Name="Abbreviation" ColumnName="staAbbreviation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
