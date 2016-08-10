@@ -81,3 +81,6 @@ C:\Users\Dylan.ORTHONT\OneDrive\Projects\MediaInventory\MediaInventory\obj\Debug
 C:\Users\Dylan.ORTHONT\OneDrive\Projects\MediaInventory\MediaInventory\obj\Debug\UserControls\InventorySettings.baml
 C:\Users\Dylan.ORTHONT\OneDrive\Projects\MediaInventory\MediaInventory\obj\Debug\UserControls\AddMovie.g.cs
 C:\Users\Dylan.ORTHONT\OneDrive\Projects\MediaInventory\MediaInventory\obj\Debug\UserControls\AddMovie.baml
+C:\GitRepo\MediaInventory\MediaInventory\bin\Debug\MediaInventory.exe.config
+C:\GitRepo\MediaInventory\MediaInventory\obj\Debug\MediaInventory.exe
+C:\GitRepo\MediaInventory\MediaInventory\obj\Debug\MediaInventory.pdb
