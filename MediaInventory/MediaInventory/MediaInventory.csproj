@@ -121,21 +121,6 @@
     <Compile Include="Data\Format.cs">
       <DependentUpon>MediaInventoryModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\InventoryModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>InventoryModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\InventoryModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>InventoryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\InventoryModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>InventoryModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Data\InventoryUser.cs">
       <DependentUpon>MediaInventoryModel.tt</DependentUpon>
     </Compile>
@@ -248,13 +233,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Data\InventoryModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>InventoryModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Data\InventoryModel.edmx.diagram">
-      <DependentUpon>InventoryModel.edmx</DependentUpon>
-    </None>
     <EntityDeploy Include="Data\MediaInventoryModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MediaInventoryModel.Designer.cs</LastGenOutput>
@@ -347,16 +325,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Data\InventoryModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>InventoryModel.edmx</DependentUpon>
-      <LastGenOutput>InventoryModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Data\InventoryModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>InventoryModel.edmx</DependentUpon>
-      <LastGenOutput>InventoryModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Data\MediaInventoryModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MediaInventoryModel.edmx</DependentUpon>

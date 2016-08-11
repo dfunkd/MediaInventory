@@ -7,7 +7,7 @@ namespace MediaInventory.Data
     {
         public static void InitializeAzureDatabase()
         {
-            using (var localDB = new InventoryEntities())
+            using (var localDB = new MediaInventoryEntities())
             {
                 //No Constraints
                 var localFormats = localDB.Formats.ToList();
@@ -155,7 +155,7 @@ namespace MediaInventory.Data
         {
             using (var cloudDB = new MediaInventoryEntities())
             {
-                using (var localDB = new InventoryEntities())
+                using (var localDB = new MediaInventoryEntities())
                 {
 
                 }
@@ -166,7 +166,7 @@ namespace MediaInventory.Data
         /// </summary>
         public static void SyncLocalToCloud()
         {
-            using (var localDB = new InventoryEntities())
+            using (var localDB = new MediaInventoryEntities())
             {
                 using (var cloudDB = new MediaInventoryEntities())
                 {
