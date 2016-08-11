@@ -141,7 +141,6 @@ namespace MediaInventory
         public Inventory()
         {
             InitializeComponent();
-            //SyncDatabases.InitializeAzureDatabase();
             Helpers.InventoryWindow = this;
             Globals.Default.PropertyChanged += Default_PropertyChanged;
             Loaded += (s, a) =>
