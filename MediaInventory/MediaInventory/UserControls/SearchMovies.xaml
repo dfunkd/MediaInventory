@@ -9,7 +9,9 @@
              x:Name="searchMovies">
 
     <UserControl.Resources>
-        <CollectionViewSource x:Key="cvsInventory" />
+        <CollectionViewSource x:Key="cvsInventory">
+            
+        </CollectionViewSource>
         <Style x:Key="{x:Type DataGridCell}" TargetType="{x:Type DataGridCell}">
             <Setter Property="Background" Value="{x:Null}" />
             <Setter Property="BorderBrush" Value="{x:Null}" />

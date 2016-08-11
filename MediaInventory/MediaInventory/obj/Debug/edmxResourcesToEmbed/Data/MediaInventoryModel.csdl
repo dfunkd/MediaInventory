@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MediaInventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CheckOutHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MOVid" Type="Int32" Nullable="false" />
+    <Property Name="CSTid" Type="Int32" Nullable="false" />
+    <Property Name="CheckOutDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CheckInDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_CheckOutHistory_Customer" FromRole="CheckOutHistory" ToRole="Customer" />
+    <NavigationProperty Name="Movie" Relationship="Self.FK_CheckOutHistory_Movie" FromRole="CheckOutHistory" ToRole="Movie" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AddressLine1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AddressLine2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="STAid" Type="Int32" Nullable="false" />
+    <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CellPhone" Type="String" MaxLength="14" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="HomePhone" Type="String" MaxLength="14" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="CheckOutHistories" Relationship="Self.FK_CheckOutHistory_Customer" FromRole="Customer" ToRole="CheckOutHistory" />
+    <NavigationProperty Name="State" Relationship="Self.FK_Customer_State" FromRole="Customer" ToRole="State" />
+  </EntityType>
+  <EntityType Name="Format">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Movies" Relationship="Self.FK_Movie_Format" FromRole="Format" ToRole="Movie" />
+  </EntityType>
+  <EntityType Name="InventoryUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CellPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SQ1id" Type="Int32" Nullable="false" />
+    <Property Name="SQ2id" Type="Int32" Nullable="false" />
+    <Property Name="SQ3id" Type="Int32" Nullable="false" />
+    <Property Name="Answer1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Answer2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Answer3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ROLid" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SecurityQuestion" Relationship="Self.FK_InventoryUser_SecurityQuestion" FromRole="InventoryUser" ToRole="SecurityQuestion" />
+    <NavigationProperty Name="SecurityQuestion1" Relationship="Self.FK_InventoryUser_SecurityQuestion1" FromRole="InventoryUser" ToRole="SecurityQuestion" />
+    <NavigationProperty Name="SecurityQuestion2" Relationship="Self.FK_InventoryUser_SecurityQuestion2" FromRole="InventoryUser" ToRole="SecurityQuestion" />
+    <NavigationProperty Name="SecurityRole" Relationship="Self.FK_InventoryUser_SecurityRole" FromRole="InventoryUser" ToRole="SecurityRole" />
+  </EntityType>
+  <EntityType Name="Movie">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TMDbId" Type="Int32" Nullable="false" />
+    <Property Name="IMDbId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsOwned" Type="Boolean" Nullable="false" />
+    <Property Name="IsWanted" Type="Boolean" Nullable="false" />
+    <Property Name="FORId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CheckOutHistories" Relationship="Self.FK_CheckOutHistory_Movie" FromRole="Movie" ToRole="CheckOutHistory" />
+    <NavigationProperty Name="Format" Relationship="Self.FK_Movie_Format" FromRole="Movie" ToRole="Format" />
+  </EntityType>
+  <EntityType Name="SecurityQuestion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="InventoryUsers" Relationship="Self.FK_InventoryUser_SecurityQuestion" FromRole="SecurityQuestion" ToRole="InventoryUser" />
+    <NavigationProperty Name="InventoryUsers1" Relationship="Self.FK_InventoryUser_SecurityQuestion1" FromRole="SecurityQuestion" ToRole="InventoryUser" />
+    <NavigationProperty Name="InventoryUsers2" Relationship="Self.FK_InventoryUser_SecurityQuestion2" FromRole="SecurityQuestion" ToRole="InventoryUser" />
+  </EntityType>
+  <EntityType Name="SecurityRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Role" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="InventoryUsers" Relationship="Self.FK_InventoryUser_SecurityRole" FromRole="SecurityRole" ToRole="InventoryUser" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Abbreviation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_State" FromRole="State" ToRole="Customer" />
+  </EntityType>
+  <Association Name="FK_CheckOutHistory_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="CheckOutHistory" Type="Self.CheckOutHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CheckOutHistory">
+        <PropertyRef Name="CSTid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CheckOutHistory_Movie">
+    <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+    <End Role="CheckOutHistory" Type="Self.CheckOutHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CheckOutHistory">
+        <PropertyRef Name="MOVid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_State">
+    <End Role="State" Type="Self.State" Multiplicity="1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="STAid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movie_Format">
+    <End Role="Format" Type="Self.Format" Multiplicity="1" />
+    <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Format">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Movie">
+        <PropertyRef Name="FORId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryUser_SecurityQuestion">
+    <End Role="SecurityQuestion" Type="Self.SecurityQuestion" Multiplicity="1" />
+    <End Role="InventoryUser" Type="Self.InventoryUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SecurityQuestion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InventoryUser">
+        <PropertyRef Name="SQ1id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryUser_SecurityQuestion1">
+    <End Role="SecurityQuestion" Type="Self.SecurityQuestion" Multiplicity="1" />
+    <End Role="InventoryUser" Type="Self.InventoryUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SecurityQuestion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InventoryUser">
+        <PropertyRef Name="SQ2id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryUser_SecurityQuestion2">
+    <End Role="SecurityQuestion" Type="Self.SecurityQuestion" Multiplicity="1" />
+    <End Role="InventoryUser" Type="Self.InventoryUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SecurityQuestion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InventoryUser">
+        <PropertyRef Name="SQ3id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryUser_SecurityRole">
+    <End Role="SecurityRole" Type="Self.SecurityRole" Multiplicity="1" />
+    <End Role="InventoryUser" Type="Self.InventoryUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SecurityRole">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InventoryUser">
+        <PropertyRef Name="ROLid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MediaInventoryEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CheckOutHistories" EntityType="Self.CheckOutHistory" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Formats" EntityType="Self.Format" />
+    <EntitySet Name="InventoryUsers" EntityType="Self.InventoryUser" />
+    <EntitySet Name="Movies" EntityType="Self.Movie" />
+    <EntitySet Name="SecurityQuestions" EntityType="Self.SecurityQuestion" />
+    <EntitySet Name="SecurityRoles" EntityType="Self.SecurityRole" />
+    <EntitySet Name="States" EntityType="Self.State" />
+    <AssociationSet Name="FK_CheckOutHistory_Customer" Association="Self.FK_CheckOutHistory_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="CheckOutHistory" EntitySet="CheckOutHistories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CheckOutHistory_Movie" Association="Self.FK_CheckOutHistory_Movie">
+      <End Role="Movie" EntitySet="Movies" />
+      <End Role="CheckOutHistory" EntitySet="CheckOutHistories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_State" Association="Self.FK_Customer_State">
+      <End Role="State" EntitySet="States" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movie_Format" Association="Self.FK_Movie_Format">
+      <End Role="Format" EntitySet="Formats" />
+      <End Role="Movie" EntitySet="Movies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryUser_SecurityQuestion" Association="Self.FK_InventoryUser_SecurityQuestion">
+      <End Role="SecurityQuestion" EntitySet="SecurityQuestions" />
+      <End Role="InventoryUser" EntitySet="InventoryUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryUser_SecurityQuestion1" Association="Self.FK_InventoryUser_SecurityQuestion1">
+      <End Role="SecurityQuestion" EntitySet="SecurityQuestions" />
+      <End Role="InventoryUser" EntitySet="InventoryUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryUser_SecurityQuestion2" Association="Self.FK_InventoryUser_SecurityQuestion2">
+      <End Role="SecurityQuestion" EntitySet="SecurityQuestions" />
+      <End Role="InventoryUser" EntitySet="InventoryUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryUser_SecurityRole" Association="Self.FK_InventoryUser_SecurityRole">
+      <End Role="SecurityRole" EntitySet="SecurityRoles" />
+      <End Role="InventoryUser" EntitySet="InventoryUsers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

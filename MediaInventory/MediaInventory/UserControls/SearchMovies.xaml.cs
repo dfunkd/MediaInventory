@@ -320,7 +320,7 @@ namespace MediaInventory.UserControls
         {
             txtSearchCriteria.Focus();
             CollectionViewSource cvs = (CollectionViewSource)FindResource("cvsInventory");
-            cvs.Source = new ObservableCollection<Movie>(Helpers.InventoryWindow.InventoryEntity.Movies);
+            cvs.Source = new ObservableCollection<Movie>(Helpers.InventoryWindow.InventoryEntity.Movies.OrderBy(o=>o.Name));
             cvs.View.Filter = MovieFilter;
             dgMovies.ItemsSource = cvs.View;
             dgMovies.SelectedIndex = 0;

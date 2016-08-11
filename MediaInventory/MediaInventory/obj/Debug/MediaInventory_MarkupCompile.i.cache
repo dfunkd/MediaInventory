@@ -11,9 +11,9 @@ false
 DEBUG;TRACE
 C:\GitRepo\MediaInventory\MediaInventory\App.xaml
 17-846308743
-21418123883
-511252912857
-281828205636
+4-470835478
+552066386240
+29-1131442775
 Inventory.xaml;UserControls\Add.xaml;UserControls\AddCustomer.xaml;UserControls\AddMovie.xaml;UserControls\AnimatedWatermarkPasswordBox.xaml;UserControls\AnimatedWatermarkTextBox.xaml;UserControls\Edit.xaml;UserControls\ForgotLoginPassword.xaml;UserControls\Login.xaml;UserControls\MaskedTextBoxWithHeader.xaml;UserControls\Search.xaml;UserControls\SearchCustomers.xaml;UserControls\SearchMovies.xaml;UserControls\InventorySettings.xaml;Windows\CheckOutToCustomer.xaml;Windows\CustomMessageBox.xaml;Windows\ViewCheckOutHistoryWindow.xaml;
 
 True

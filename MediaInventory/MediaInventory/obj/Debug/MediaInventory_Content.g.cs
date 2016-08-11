@@ -10,5 +10,7 @@
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("data/inventorymodel.context.tt")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("data/inventorymodel.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("data/mediainventorymodel.context.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("data/mediainventorymodel.tt")]
 
 
