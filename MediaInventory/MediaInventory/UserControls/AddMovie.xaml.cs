@@ -92,20 +92,44 @@ namespace MediaInventory.UserControls
         private void AddMovieCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             //Remove after Format Selection is Setup.
-            NewMovie.FORId = 2;
+            var format = Helpers.InventoryWindow.InventoryEntity.Formats.Where(w => w.Name == "Blu-Ray").FirstOrDefault();
+            if (format == null)
+            {
+                MessageBox.Show("There was an error.", "Invlid Format", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            NewMovie.FORId = format.Id;
+            var customer = Helpers.InventoryWindow.InventoryEntity.Customers.Where(w => w.FirstName == "Dylan" && w.LastName == "Funk").FirstOrDefault();
+            if (customer == null)
+            {
+                MessageBox.Show("There was an error.", "Invlid Customer", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             if (Helpers.InventoryWindow.InventoryEntity.Movies.ToList().FindAll(f => f.Name == NewMovie.Name && f.FORId == NewMovie.FORId).Count == 0)
             {
-                Helpers.InventoryWindow.InventoryEntity.Movies.Add(NewMovie);
-                Helpers.InventoryWindow.InventoryEntity.SaveChanges();
-                Helpers.InventoryWindow.InventoryEntity.CheckOutHistories.Add(new CheckOutHistory
+                using (var trans = Helpers.InventoryWindow.InventoryEntity.Database.BeginTransaction())
                 {
-                    CheckInDate = null,
-                    CheckOutDate = DateTime.Now,
-                    CSTid = 1,
-                    MOVid = NewMovie.Id
-                });
-                Helpers.InventoryWindow.InventoryEntity.SaveChanges();
-                txtSearchCriteria.txtContent.Text = string.Empty;
+                    try
+                    {
+                        Helpers.InventoryWindow.InventoryEntity.Movies.Add(NewMovie);
+                        Helpers.InventoryWindow.InventoryEntity.SaveChanges();
+                        Helpers.InventoryWindow.InventoryEntity.CheckOutHistories.Add(new CheckOutHistory
+                        {
+                            CheckInDate = null,
+                            CheckOutDate = DateTime.Now,
+                            CSTid = customer.Id,
+                            MOVid = NewMovie.Id
+                        });
+                        Helpers.InventoryWindow.InventoryEntity.SaveChanges();
+                        txtSearchCriteria.txtContent.Text = string.Empty;
+                        trans.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        trans.Rollback();
+                        MessageBox.Show(string.Format("There was an error.{0}{1}", Environment.NewLine, ex.Message), "Database Chages Rolled Back", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
             }
             else
                 MessageBox.Show("Movie / Format combination is already in the database.", "Error", MessageBoxButton.OK, MessageBoxImage.Asterisk);

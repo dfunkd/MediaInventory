@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MediaInventoryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CheckOutHistory">
+    <Key>
+      <PropertyRef Name="cohId" />
+    </Key>
+    <Property Name="cohId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cohMOVid" Type="int" Nullable="false" />
+    <Property Name="cohCSTid" Type="int" Nullable="false" />
+    <Property Name="cohCheckOutDate" Type="datetime" Nullable="false" />
+    <Property Name="cohCheckInDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="cstId" />
+    </Key>
+    <Property Name="cstId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cstFirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="cstLastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="cstAddressLine1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="cstAddressLine2" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="cstCity" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="cstSTAid" Type="int" Nullable="false" />
+    <Property Name="cstZipCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="cstCellPhone" Type="nvarchar" MaxLength="14" Nullable="false" />
+    <Property Name="cstHomePhone" Type="nvarchar" MaxLength="14" Nullable="false" />
+    <Property Name="cstEmailAddress" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Format">
+    <Key>
+      <PropertyRef Name="forId" />
+    </Key>
+    <Property Name="forId" Type="int" Nullable="false" />
+    <Property Name="forName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InventoryUser">
+    <Key>
+      <PropertyRef Name="useId" />
+    </Key>
+    <Property Name="useId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="useLogin" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="usePassword" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="useFirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="useLastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="useEmail" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="useCellPhone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="useSQ1id" Type="int" Nullable="false" />
+    <Property Name="useSQ2id" Type="int" Nullable="false" />
+    <Property Name="useSQ3id" Type="int" Nullable="false" />
+    <Property Name="useAnswer1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="useAnswer2" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="useAnswer3" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="useROLid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Movie">
+    <Key>
+      <PropertyRef Name="movId" />
+    </Key>
+    <Property Name="movId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="movName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="movTMDbId" Type="int" Nullable="false" />
+    <Property Name="movIMDbId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="movIsOwned" Type="bit" Nullable="false" />
+    <Property Name="movIsWanted" Type="bit" Nullable="false" />
+    <Property Name="movFORId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SecurityQuestion">
+    <Key>
+      <PropertyRef Name="seqId" />
+    </Key>
+    <Property Name="seqId" Type="int" Nullable="false" />
+    <Property Name="seqQuestion" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SecurityRole">
+    <Key>
+      <PropertyRef Name="rolId" />
+    </Key>
+    <Property Name="rolId" Type="int" Nullable="false" />
+    <Property Name="rolRole" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="rolDescription" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="staId" />
+    </Key>
+    <Property Name="staId" Type="int" Nullable="false" />
+    <Property Name="staName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="staAbbreviation" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_CheckOutHistory_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="CheckOutHistory" Type="Self.CheckOutHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="cstId" />
+      </Principal>
+      <Dependent Role="CheckOutHistory">
+        <PropertyRef Name="cohCSTid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CheckOutHistory_Movie">
+    <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+    <End Role="CheckOutHistory" Type="Self.CheckOutHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movie">
+        <PropertyRef Name="movId" />
+      </Principal>
+      <Dependent Role="CheckOutHistory">
+        <PropertyRef Name="cohMOVid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_State">
+    <End Role="State" Type="Self.State" Multiplicity="1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="staId" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="cstSTAid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryUser_SecurityQuestion">
+    <End Role="SecurityQuestion" Type="Self.SecurityQuestion" Multiplicity="1" />
+    <End Role="InventoryUser" Type="Self.InventoryUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SecurityQuestion">
+        <PropertyRef Name="seqId" />
+      </Principal>
+      <Dependent Role="InventoryUser">
+        <PropertyRef Name="useSQ1id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryUser_SecurityQuestion1">
+    <End Role="SecurityQuestion" Type="Self.SecurityQuestion" Multiplicity="1" />
+    <End Role="InventoryUser" Type="Self.InventoryUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SecurityQuestion">
+        <PropertyRef Name="seqId" />
+      </Principal>
+      <Dependent Role="InventoryUser">
+        <PropertyRef Name="useSQ2id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryUser_SecurityQuestion2">
+    <End Role="SecurityQuestion" Type="Self.SecurityQuestion" Multiplicity="1" />
+    <End Role="InventoryUser" Type="Self.InventoryUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SecurityQuestion">
+        <PropertyRef Name="seqId" />
+      </Principal>
+      <Dependent Role="InventoryUser">
+        <PropertyRef Name="useSQ3id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryUser_SecurityRole">
+    <End Role="SecurityRole" Type="Self.SecurityRole" Multiplicity="1" />
+    <End Role="InventoryUser" Type="Self.InventoryUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SecurityRole">
+        <PropertyRef Name="rolId" />
+      </Principal>
+      <Dependent Role="InventoryUser">
+        <PropertyRef Name="useROLid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movie_Format">
+    <End Role="Format" Type="Self.Format" Multiplicity="1" />
+    <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Format">
+        <PropertyRef Name="forId" />
+      </Principal>
+      <Dependent Role="Movie">
+        <PropertyRef Name="movFORId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MediaInventoryModelStoreContainer">
+    <EntitySet Name="CheckOutHistory" EntityType="Self.CheckOutHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Format" EntityType="Self.Format" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InventoryUser" EntityType="Self.InventoryUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SecurityQuestion" EntityType="Self.SecurityQuestion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SecurityRole" EntityType="Self.SecurityRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CheckOutHistory_Customer" Association="Self.FK_CheckOutHistory_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="CheckOutHistory" EntitySet="CheckOutHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CheckOutHistory_Movie" Association="Self.FK_CheckOutHistory_Movie">
+      <End Role="Movie" EntitySet="Movie" />
+      <End Role="CheckOutHistory" EntitySet="CheckOutHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_State" Association="Self.FK_Customer_State">
+      <End Role="State" EntitySet="State" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryUser_SecurityQuestion" Association="Self.FK_InventoryUser_SecurityQuestion">
+      <End Role="SecurityQuestion" EntitySet="SecurityQuestion" />
+      <End Role="InventoryUser" EntitySet="InventoryUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryUser_SecurityQuestion1" Association="Self.FK_InventoryUser_SecurityQuestion1">
+      <End Role="SecurityQuestion" EntitySet="SecurityQuestion" />
+      <End Role="InventoryUser" EntitySet="InventoryUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryUser_SecurityQuestion2" Association="Self.FK_InventoryUser_SecurityQuestion2">
+      <End Role="SecurityQuestion" EntitySet="SecurityQuestion" />
+      <End Role="InventoryUser" EntitySet="InventoryUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryUser_SecurityRole" Association="Self.FK_InventoryUser_SecurityRole">
+      <End Role="SecurityRole" EntitySet="SecurityRole" />
+      <End Role="InventoryUser" EntitySet="InventoryUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movie_Format" Association="Self.FK_Movie_Format">
+      <End Role="Format" EntitySet="Format" />
+      <End Role="Movie" EntitySet="Movie" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

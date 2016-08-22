@@ -13,10 +13,10 @@ namespace MediaInventory.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class InventoryEntities : DbContext
+    public partial class MediaInventoryEntities : DbContext
     {
-        public InventoryEntities()
-            : base("name=InventoryEntities")
+        public MediaInventoryEntities()
+            : base("name=MediaInventoryEntities")
         {
         }
     

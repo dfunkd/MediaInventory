@@ -179,7 +179,11 @@ namespace MediaInventory.Resources
             }
             catch { return false; }
         }
-        public static bool IsLink(this string link) => string.IsNullOrWhiteSpace(link) == false && (link.IsValidEmail() || Uri.IsWellFormedUriString(link, UriKind.Absolute));
+        //public static bool IsLink(this string link) => string.IsNullOrWhiteSpace(link) == false && (link.IsValidEmail() || Uri.IsWellFormedUriString(link, UriKind.Absolute));
+        public static bool IsLink(this string link)
+        {
+            return string.IsNullOrWhiteSpace(link) == false && (link.IsValidEmail() || Uri.IsWellFormedUriString(link, UriKind.Absolute));
+        }
         public static List<Tuple<int, string>> GetLinkWords(this string text)
         {
             var linkWords = new List<Tuple<int, string>>();

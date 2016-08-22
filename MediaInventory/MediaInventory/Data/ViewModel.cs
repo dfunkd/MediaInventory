@@ -10,7 +10,7 @@ namespace MediaInventory.Data
 {
     public class ViewModel
     {
-        InventoryEntities db = new InventoryEntities();
+        MediaInventoryEntities db = new MediaInventoryEntities();
         public CollectionViewSource Movies { get; set; }
         private ObservableCollection<Movie> MoviesInternal { get; set; }
         public ViewModel()
