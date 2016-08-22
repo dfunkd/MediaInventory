@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace MediaInventory.Data
@@ -34,7 +33,7 @@ namespace MediaInventory.Data
         private ObservableCollection<string> _customerNames;
         private ObservableCollection<Customer> _customers;
         private static DataHelper _defaultInstance;
-        private InventoryEntities _entity;
+        private MediaInventoryEntities _entity;
         private ObservableCollection<Format> _formats;
         private ListCollectionView _movieCollection;
         private ObservableCollection<Movie> _movies;
@@ -107,12 +106,12 @@ namespace MediaInventory.Data
                 return _defaultInstance;
             }
         }
-        public InventoryEntities Entity
+        public MediaInventoryEntities Entity
         {
             get
             {
                 if (_entity == null)
-                    _entity = new InventoryEntities();
+                    _entity = new MediaInventoryEntities();
                 return _entity;
             }
         }

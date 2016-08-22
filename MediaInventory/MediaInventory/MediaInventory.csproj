@@ -52,6 +52,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -109,48 +110,48 @@
     </Compile>
     <Compile Include="CustomControls\HeaderContentControl.cs" />
     <Compile Include="Data\CheckOutHistory.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>MediaInventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\CheckOutHistoryExt.cs" />
     <Compile Include="Data\Customer.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>MediaInventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\CustomerExt.cs" />
     <Compile Include="Data\DataHelper.cs" />
     <Compile Include="Data\Format.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\InventoryModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>InventoryModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\InventoryModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>InventoryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\InventoryModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>InventoryModel.edmx</DependentUpon>
+      <DependentUpon>MediaInventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\InventoryUser.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>MediaInventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\InventoryUserExt.cs" />
+    <Compile Include="Data\MediaInventoryModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MediaInventoryModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\MediaInventoryModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MediaInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\MediaInventoryModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MediaInventoryModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Data\Movie.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>MediaInventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\MovieExt.cs" />
     <Compile Include="Data\SecurityQuestion.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>MediaInventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\SecurityRole.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>MediaInventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\State.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>MediaInventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\ViewModel.cs" />
     <Compile Include="Resources\Animations\BounceAnimation.cs" />
@@ -231,12 +232,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Data\InventoryModel.edmx">
+    <EntityDeploy Include="Data\MediaInventoryModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>InventoryModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>MediaInventoryModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Data\InventoryModel.edmx.diagram">
-      <DependentUpon>InventoryModel.edmx</DependentUpon>
+    <None Include="Data\MediaInventoryModel.edmx.diagram">
+      <DependentUpon>MediaInventoryModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -323,15 +324,15 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Data\InventoryModel.Context.tt">
+    <Content Include="Data\MediaInventoryModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>InventoryModel.edmx</DependentUpon>
-      <LastGenOutput>InventoryModel.Context.cs</LastGenOutput>
+      <DependentUpon>MediaInventoryModel.edmx</DependentUpon>
+      <LastGenOutput>MediaInventoryModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Data\InventoryModel.tt">
+    <Content Include="Data\MediaInventoryModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>InventoryModel.edmx</DependentUpon>
-      <LastGenOutput>InventoryModel.cs</LastGenOutput>
+      <DependentUpon>MediaInventoryModel.edmx</DependentUpon>
+      <LastGenOutput>MediaInventoryModel.cs</LastGenOutput>
     </Content>
     <Resource Include="Resources\Icons\MultiGear.ico" />
     <Resource Include="Resources\Icons\Setting.ico" />

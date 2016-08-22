@@ -9,7 +9,9 @@
              x:Name="searchMovies">
 
     <UserControl.Resources>
-        <CollectionViewSource x:Key="cvsInventory" />
+        <CollectionViewSource x:Key="cvsInventory">
+            
+        </CollectionViewSource>
         <Style x:Key="{x:Type DataGridCell}" TargetType="{x:Type DataGridCell}">
             <Setter Property="Background" Value="{x:Null}" />
             <Setter Property="BorderBrush" Value="{x:Null}" />
@@ -92,9 +94,9 @@
                         <DockPanel DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" LastChildFill="True" Margin="5">
                             <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Right" LastChildFill="False" Margin="5">
                                 <RadioButton x:Name="rdoIsCheckedOut" DockPanel.Dock="Top" Margin="8" HorizontalAlignment="Left" Click="rdoIsCheckedOut_Click"
-                                         Content="{Binding IsCheckedOut, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IsCheckedOutToTextConverter}}"
-                                         Background="{Binding IsCheckedOut, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IsCheckedOutToBackgroundColorConverter}}"
-                                         IsChecked="{Binding IsCheckedOut, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Converter={StaticResource CheckOutEnabledConverter}}" />
+                                         Content="{Binding Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IsCheckedOutToTextConverter}}"
+                                         Background="{Binding Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IsCheckedOutToBackgroundColorConverter}}"
+                                         IsChecked="{Binding Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Converter={StaticResource CheckOutEnabledConverter}}" />
                                 <!--<CheckBox x:Name="cboIsOwned" DockPanel.Dock="Top" Content="Is Owned" Margin="8, 0" HorizontalAlignment="Left" Checked="cboIsOwned_Checked" Unchecked="cboIsOwned_Unchecked"
                                       IsChecked="{Binding IsOwned, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Converter={StaticResource CheckOutEnabledConverter}}">
                                     <ToggleButton.RenderTransform>
@@ -173,10 +175,10 @@
                     <EventSetter Event="PreviewMouseLeftButtonDown" Handler="OnSelectRowDetails"/>
                     <Style.Triggers>
                         <Trigger Property="AlternationIndex" Value="0">
-                            <Setter Property="Background" Value="{Binding IsCheckedOut, Converter={StaticResource IsCheckedOutToRowColorConverter}}" />
+                            <Setter Property="Background" Value="{Binding Converter={StaticResource IsCheckedOutToRowColorConverter}}" />
                         </Trigger>
                         <Trigger Property="AlternationIndex" Value="1">
-                            <Setter Property="Background" Value="{Binding IsCheckedOut, Converter={StaticResource IsCheckedOutToAlternateRowColorConverter}}" />
+                            <Setter Property="Background" Value="{Binding Converter={StaticResource IsCheckedOutToAlternateRowColorConverter}}" />
                         </Trigger>
                     </Style.Triggers>
                 </Style>

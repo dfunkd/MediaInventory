@@ -31,7 +31,11 @@ namespace MediaInventory.Resources
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Globals.Default.CurrentRole == SecurityRoles.Administrator || Globals.Default.CurrentRole == SecurityRoles.Employee;
+            if (!(value is Movie))
+                return false;
+            var isValidUser = Globals.Default.CurrentRole == SecurityRoles.Administrator || Globals.Default.CurrentRole == SecurityRoles.Employee;
+            var isOwned = (value as Movie).IsOwned;
+            return isValidUser && isOwned;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -144,11 +148,12 @@ namespace MediaInventory.Resources
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            SolidColorBrush colorBrush;
-            if (!(value is bool))
-                colorBrush = new SolidColorBrush(Colors.Transparent);
-            colorBrush = (bool)value ? (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFB46765")) : (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF5CA461"));
-            return colorBrush;
+            if (!(value is Movie))
+                return (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFB46765"));
+            var movie = value as Movie;
+            if (movie.IsOwned)
+                return movie.IsCheckedOut ? (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFB46765")) : (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF5CA461"));
+            return (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFB46765"));
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -159,11 +164,12 @@ namespace MediaInventory.Resources
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            SolidColorBrush colorBrush;
-            if (!(value is bool))
-                colorBrush = new SolidColorBrush(Colors.Transparent);
-            colorBrush = (bool)value ? (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF783C3B")) : (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF46638E"));//356C38 - Dark Green
-            return colorBrush;
+            if (!(value is Movie))
+                return (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFB3B465"));
+            var movie = value as Movie;
+            if(movie.IsOwned)
+                return (value as Movie).IsCheckedOut ? (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF783C3B")) : (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF46638E"));//356C38 - Dark Green
+            return (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFB3B465"));
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -174,9 +180,12 @@ namespace MediaInventory.Resources
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is bool))
+            if (!(value is Movie))
                 return string.Empty;
-            return (bool)value ? "Checked Out" : "Available";
+            var movie = value as Movie;
+            if (movie.IsOwned)
+                return (value as Movie).IsCheckedOut ? "Checked Out" : "Available";
+            return "Not Owned";
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

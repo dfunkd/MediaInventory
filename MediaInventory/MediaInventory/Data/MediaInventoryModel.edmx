@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="InventoryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MediaInventoryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CheckOutHistory">
           <Key>
             <PropertyRef Name="cohId" />
@@ -35,7 +35,7 @@
           <Key>
             <PropertyRef Name="forId" />
           </Key>
-          <Property Name="forId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="forId" Type="int" Nullable="false" />
           <Property Name="forName" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="InventoryUser">
@@ -73,14 +73,14 @@
           <Key>
             <PropertyRef Name="seqId" />
           </Key>
-          <Property Name="seqId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="seqId" Type="int" Nullable="false" />
           <Property Name="seqQuestion" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="SecurityRole">
           <Key>
             <PropertyRef Name="rolId" />
           </Key>
-          <Property Name="rolId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rolId" Type="int" Nullable="false" />
           <Property Name="rolRole" Type="nvarchar(max)" Nullable="false" />
           <Property Name="rolDescription" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
@@ -88,8 +88,8 @@
           <Key>
             <PropertyRef Name="staId" />
           </Key>
-          <Property Name="staId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="staName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="staId" Type="int" Nullable="false" />
+          <Property Name="staName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="staAbbreviation" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_CheckOutHistory_Customer">
@@ -188,7 +188,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="InventoryModelStoreContainer">
+        <EntityContainer Name="MediaInventoryModelStoreContainer">
           <EntitySet Name="CheckOutHistory" EntityType="Self.CheckOutHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Format" EntityType="Self.Format" Schema="dbo" store:Type="Tables" />
@@ -234,7 +234,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="InventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="MediaInventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="CheckOutHistory">
           <Key>
             <PropertyRef Name="Id" />
@@ -269,7 +269,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Movies" Relationship="Self.FK_Movie_Format" FromRole="Format" ToRole="Movie" />
         </EntityType>
@@ -314,7 +314,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="InventoryUsers" Relationship="Self.FK_InventoryUser_SecurityQuestion" FromRole="SecurityQuestion" ToRole="InventoryUser" />
           <NavigationProperty Name="InventoryUsers1" Relationship="Self.FK_InventoryUser_SecurityQuestion1" FromRole="SecurityQuestion" ToRole="InventoryUser" />
@@ -324,7 +324,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Role" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="InventoryUsers" Relationship="Self.FK_InventoryUser_SecurityRole" FromRole="SecurityRole" ToRole="InventoryUser" />
@@ -333,8 +333,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Abbreviation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_State" FromRole="State" ToRole="Customer" />
         </EntityType>
@@ -434,7 +434,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="InventoryEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="MediaInventoryEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CheckOutHistories" EntityType="Self.CheckOutHistory" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Formats" EntityType="Self.Format" />
@@ -481,9 +481,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="InventoryModelStoreContainer" CdmEntityContainer="InventoryEntities">
+        <EntityContainerMapping StorageEntityContainer="MediaInventoryModelStoreContainer" CdmEntityContainer="MediaInventoryEntities">
           <EntitySetMapping Name="CheckOutHistories">
-            <EntityTypeMapping TypeName="InventoryModel.CheckOutHistory">
+            <EntityTypeMapping TypeName="MediaInventoryModel.CheckOutHistory">
               <MappingFragment StoreEntitySet="CheckOutHistory">
                 <ScalarProperty Name="Id" ColumnName="cohId" />
                 <ScalarProperty Name="MOVid" ColumnName="cohMOVid" />
@@ -494,7 +494,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="InventoryModel.Customer">
+            <EntityTypeMapping TypeName="MediaInventoryModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
                 <ScalarProperty Name="Id" ColumnName="cstId" />
                 <ScalarProperty Name="FirstName" ColumnName="cstFirstName" />
@@ -511,7 +511,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Formats">
-            <EntityTypeMapping TypeName="InventoryModel.Format">
+            <EntityTypeMapping TypeName="MediaInventoryModel.Format">
               <MappingFragment StoreEntitySet="Format">
                 <ScalarProperty Name="Id" ColumnName="forId" />
                 <ScalarProperty Name="Name" ColumnName="forName" />
@@ -519,7 +519,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryUsers">
-            <EntityTypeMapping TypeName="InventoryModel.InventoryUser">
+            <EntityTypeMapping TypeName="MediaInventoryModel.InventoryUser">
               <MappingFragment StoreEntitySet="InventoryUser">
                 <ScalarProperty Name="Id" ColumnName="useId" />
                 <ScalarProperty Name="Login" ColumnName="useLogin" />
@@ -539,7 +539,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Movies">
-            <EntityTypeMapping TypeName="InventoryModel.Movie">
+            <EntityTypeMapping TypeName="MediaInventoryModel.Movie">
               <MappingFragment StoreEntitySet="Movie">
                 <ScalarProperty Name="Id" ColumnName="movId" />
                 <ScalarProperty Name="Name" ColumnName="movName" />
@@ -552,7 +552,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SecurityQuestions">
-            <EntityTypeMapping TypeName="InventoryModel.SecurityQuestion">
+            <EntityTypeMapping TypeName="MediaInventoryModel.SecurityQuestion">
               <MappingFragment StoreEntitySet="SecurityQuestion">
                 <ScalarProperty Name="Id" ColumnName="seqId" />
                 <ScalarProperty Name="Question" ColumnName="seqQuestion" />
@@ -560,7 +560,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SecurityRoles">
-            <EntityTypeMapping TypeName="InventoryModel.SecurityRole">
+            <EntityTypeMapping TypeName="MediaInventoryModel.SecurityRole">
               <MappingFragment StoreEntitySet="SecurityRole">
                 <ScalarProperty Name="Id" ColumnName="rolId" />
                 <ScalarProperty Name="Role" ColumnName="rolRole" />
@@ -569,7 +569,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="States">
-            <EntityTypeMapping TypeName="InventoryModel.State">
+            <EntityTypeMapping TypeName="MediaInventoryModel.State">
               <MappingFragment StoreEntitySet="State">
                 <ScalarProperty Name="Id" ColumnName="staId" />
                 <ScalarProperty Name="Name" ColumnName="staName" />

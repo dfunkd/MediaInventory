@@ -19,10 +19,10 @@ namespace MediaInventory
         }
         #endregion
         #region InventoryEntity
-        public static readonly DependencyProperty InventoryEntityProperty = DependencyProperty.Register("InventoryEntity", typeof(InventoryEntities), typeof(Inventory), new FrameworkPropertyMetadata(DataHelper.Default.Entity));
-        public InventoryEntities InventoryEntity
+        public static readonly DependencyProperty InventoryEntityProperty = DependencyProperty.Register("InventoryEntity", typeof(MediaInventoryEntities), typeof(Inventory), new FrameworkPropertyMetadata(DataHelper.Default.Entity));
+        public MediaInventoryEntities InventoryEntity
         {
-            get { return (InventoryEntities)GetValue(InventoryEntityProperty); }
+            get { return (MediaInventoryEntities)GetValue(InventoryEntityProperty); }
             set { SetValue(InventoryEntityProperty, value); }
         }
         #endregion
