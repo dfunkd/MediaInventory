@@ -60,6 +60,20 @@
                     <add:AddCustomer x:Name="addCustomers" DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0" />
                 </DockPanel>
             </TabItem>
+            <TabItem Header="Recipes" Margin="1, 0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                     IsSelected="{Binding ElementName=add, Path=InventoryType, Converter={StaticResource InventoryTypeToIsCheckedConverter}, ConverterParameter={x:Static resources:InventoryTypes.Recipes}}">
+                <TabItem.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform />
+                        <SkewTransform />
+                        <RotateTransform />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </TabItem.RenderTransform>
+                <DockPanel LastChildFill="True" Background="#FF373737" VerticalAlignment="Top">
+                    <add:AddRecipe x:Name="addRecipes" DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0" />
+                </DockPanel>
+            </TabItem>
         </TabControl>
     </DockPanel>
 </UserControl>

@@ -243,3 +243,5 @@ C:\GitPersonalRepo\MediaInventory\MediaInventory\MediaInventory\obj\Debug\MediaI
 C:\GitPersonalRepo\MediaInventory\MediaInventory\MediaInventory\obj\Debug\MediaInventory.csproj.GenerateResource.Cache
 C:\GitRepo\MediaInventory\MediaInventory\obj\Debug\UserControls\SearchRecipes.g.cs
 C:\GitRepo\MediaInventory\MediaInventory\obj\Debug\UserControls\SearchRecipes.baml
+C:\GitRepo\MediaInventory\MediaInventory\obj\Debug\UserControls\AddRecipe.g.cs
+C:\GitRepo\MediaInventory\MediaInventory\obj\Debug\UserControls\AddRecipe.baml

@@ -156,6 +156,7 @@
     <Compile Include="Data\Recipe2Ingredient2Measurement.cs">
       <DependentUpon>MediaInventoryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\RecipeIngredient.cs" />
     <Compile Include="Data\SecurityQuestion.cs">
       <DependentUpon>MediaInventoryModel.tt</DependentUpon>
     </Compile>
@@ -182,6 +183,9 @@
     </Compile>
     <Compile Include="UserControls\AddMovie.xaml.cs">
       <DependentUpon>AddMovie.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AddRecipe.xaml.cs">
+      <DependentUpon>AddRecipe.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\AnimatedWatermarkPasswordBox.xaml.cs">
       <DependentUpon>AnimatedWatermarkPasswordBox.xaml</DependentUpon>
@@ -281,6 +285,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\AddRecipe.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\AnimatedWatermarkPasswordBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -353,6 +361,8 @@
       <DependentUpon>MediaInventoryModel.edmx</DependentUpon>
       <LastGenOutput>MediaInventoryModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\Images\no_photo.jpg" />
+    <Resource Include="Resources\Images\TimeFliesWhenYoureHavingRum.jpg" />
     <Resource Include="Resources\Icons\MultiGear.ico" />
     <Resource Include="Resources\Icons\Setting.ico" />
     <Resource Include="Resources\Icons\SilverGear.ico" />

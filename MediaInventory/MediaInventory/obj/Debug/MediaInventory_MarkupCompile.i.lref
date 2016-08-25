@@ -1,20 +1,4 @@
-﻿C:\GitRepo\MediaInventory\MediaInventory\obj\Debug\GeneratedInternalTypeHelper.g.i.cs
-FC:\GitRepo\MediaInventory\MediaInventory\App.xaml;;
-FC:\GitRepo\MediaInventory\MediaInventory\Inventory.xaml;;
-FC:\GitRepo\MediaInventory\MediaInventory\UserControls\Add.xaml;;
-FC:\GitRepo\MediaInventory\MediaInventory\UserControls\AddCustomer.xaml;;
-FC:\GitRepo\MediaInventory\MediaInventory\UserControls\AddMovie.xaml;;
-FC:\GitRepo\MediaInventory\MediaInventory\UserControls\AnimatedWatermarkPasswordBox.xaml;;
-FC:\GitRepo\MediaInventory\MediaInventory\UserControls\AnimatedWatermarkTextBox.xaml;;
-FC:\GitRepo\MediaInventory\MediaInventory\UserControls\Edit.xaml;;
-FC:\GitRepo\MediaInventory\MediaInventory\UserControls\ForgotLoginPassword.xaml;;
-FC:\GitRepo\MediaInventory\MediaInventory\UserControls\Login.xaml;;
-FC:\GitRepo\MediaInventory\MediaInventory\UserControls\MaskedTextBoxWithHeader.xaml;;
-FC:\GitRepo\MediaInventory\MediaInventory\UserControls\Search.xaml;;
-FC:\GitRepo\MediaInventory\MediaInventory\UserControls\SearchCustomers.xaml;;
-FC:\GitRepo\MediaInventory\MediaInventory\UserControls\SearchMovies.xaml;;
-FC:\GitRepo\MediaInventory\MediaInventory\UserControls\InventorySettings.xaml;;
-FC:\GitRepo\MediaInventory\MediaInventory\UserControls\SearchRecipes.xaml;;
-FC:\GitRepo\MediaInventory\MediaInventory\Windows\CheckOutToCustomer.xaml;;
-FC:\GitRepo\MediaInventory\MediaInventory\Windows\ViewCheckOutHistoryWindow.xaml;;
+﻿
+
+FC:\GitRepo\MediaInventory\MediaInventory\UserControls\AddRecipe.xaml;;
 

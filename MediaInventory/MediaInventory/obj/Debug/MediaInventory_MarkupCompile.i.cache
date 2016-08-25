@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\GitRepo\MediaInventory\MediaInventory\App.xaml
-18760087139
+19-218908791
 2-1888959361
-56-1782865475
+58-2129813089
 29-1131442775
-Inventory.xaml;UserControls\Add.xaml;UserControls\AddCustomer.xaml;UserControls\AddMovie.xaml;UserControls\AnimatedWatermarkPasswordBox.xaml;UserControls\AnimatedWatermarkTextBox.xaml;UserControls\Edit.xaml;UserControls\ForgotLoginPassword.xaml;UserControls\Login.xaml;UserControls\MaskedTextBoxWithHeader.xaml;UserControls\Search.xaml;UserControls\SearchCustomers.xaml;UserControls\SearchMovies.xaml;UserControls\InventorySettings.xaml;UserControls\SearchRecipes.xaml;Windows\CheckOutToCustomer.xaml;Windows\CustomMessageBox.xaml;Windows\ViewCheckOutHistoryWindow.xaml;
+Inventory.xaml;UserControls\Add.xaml;UserControls\AddCustomer.xaml;UserControls\AddMovie.xaml;UserControls\AddRecipe.xaml;UserControls\AnimatedWatermarkPasswordBox.xaml;UserControls\AnimatedWatermarkTextBox.xaml;UserControls\Edit.xaml;UserControls\ForgotLoginPassword.xaml;UserControls\Login.xaml;UserControls\MaskedTextBoxWithHeader.xaml;UserControls\Search.xaml;UserControls\SearchCustomers.xaml;UserControls\SearchMovies.xaml;UserControls\InventorySettings.xaml;UserControls\SearchRecipes.xaml;Windows\CheckOutToCustomer.xaml;Windows\CustomMessageBox.xaml;Windows\ViewCheckOutHistoryWindow.xaml;
 
 True
 
