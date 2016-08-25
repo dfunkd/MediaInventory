@@ -21,6 +21,13 @@
         <AssociationConnector Association="MediaInventoryModel.FK_InventoryUser_SecurityQuestion1" ManuallyRouted="false" />
         <AssociationConnector Association="MediaInventoryModel.FK_InventoryUser_SecurityQuestion2" ManuallyRouted="false" />
         <AssociationConnector Association="MediaInventoryModel.FK_InventoryUser_SecurityRole" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MediaInventoryModel.Ingredient" Width="1.5" PointX="9.875" PointY="4.875" />
+        <EntityTypeShape EntityType="MediaInventoryModel.Measurement" Width="1.5" PointX="9.875" PointY="2.875" />
+        <EntityTypeShape EntityType="MediaInventoryModel.Recipe2Ingredient2Measurement" Width="1.5" PointX="11.75" PointY="0.5" />
+        <EntityTypeShape EntityType="MediaInventoryModel.Recipe" Width="1.5" PointX="9.875" PointY="0.5" />
+        <AssociationConnector Association="MediaInventoryModel.FK_Recipe2Ingredient2Measurement_Ingredients" />
+        <AssociationConnector Association="MediaInventoryModel.FK_Recipe2Ingredient2Measurement_Measurements" />
+        <AssociationConnector Association="MediaInventoryModel.FK_Recipe2Ingredient2Measurement_Recipes" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

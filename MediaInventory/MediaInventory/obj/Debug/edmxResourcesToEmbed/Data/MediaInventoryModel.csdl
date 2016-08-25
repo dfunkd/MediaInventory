@@ -240,5 +240,100 @@
       <End Role="SecurityRole" EntitySet="SecurityRoles" />
       <End Role="InventoryUser" EntitySet="InventoryUsers" />
     </AssociationSet>
+    <EntitySet Name="Ingredients" EntityType="MediaInventoryModel.Ingredient" />
+    <EntitySet Name="Measurements" EntityType="MediaInventoryModel.Measurement" />
+    <EntitySet Name="Recipe2Ingredient2Measurement" EntityType="MediaInventoryModel.Recipe2Ingredient2Measurement" />
+    <EntitySet Name="Recipes" EntityType="MediaInventoryModel.Recipe" />
+    <AssociationSet Name="FK_Recipe2Ingredient2Measurement_Ingredients" Association="MediaInventoryModel.FK_Recipe2Ingredient2Measurement_Ingredients">
+      <End Role="Ingredient" EntitySet="Ingredients" />
+      <End Role="Recipe2Ingredient2Measurement" EntitySet="Recipe2Ingredient2Measurement" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe2Ingredient2Measurement_Measurements" Association="MediaInventoryModel.FK_Recipe2Ingredient2Measurement_Measurements">
+      <End Role="Measurement" EntitySet="Measurements" />
+      <End Role="Recipe2Ingredient2Measurement" EntitySet="Recipe2Ingredient2Measurement" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe2Ingredient2Measurement_Recipes" Association="MediaInventoryModel.FK_Recipe2Ingredient2Measurement_Recipes">
+      <End Role="Recipe" EntitySet="Recipes" />
+      <End Role="Recipe2Ingredient2Measurement" EntitySet="Recipe2Ingredient2Measurement" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Ingredient">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Recipe2Ingredient2Measurement" Relationship="MediaInventoryModel.FK_Recipe2Ingredient2Measurement_Ingredients" FromRole="Ingredient" ToRole="Recipe2Ingredient2Measurement" />
+  </EntityType>
+  <EntityType Name="Measurement">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Abbreviation" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Recipe2Ingredient2Measurement" Relationship="MediaInventoryModel.FK_Recipe2Ingredient2Measurement_Measurements" FromRole="Measurement" ToRole="Recipe2Ingredient2Measurement" />
+  </EntityType>
+  <EntityType Name="Recipe2Ingredient2Measurement">
+    <Key>
+      <PropertyRef Name="INGid" />
+      <PropertyRef Name="MEAid" />
+      <PropertyRef Name="RECid" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="INGid" Type="Int32" Nullable="false" />
+    <Property Name="MEAid" Type="Int32" Nullable="false" />
+    <Property Name="RECid" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="3" Scale="2" />
+    <NavigationProperty Name="Ingredient" Relationship="MediaInventoryModel.FK_Recipe2Ingredient2Measurement_Ingredients" FromRole="Recipe2Ingredient2Measurement" ToRole="Ingredient" />
+    <NavigationProperty Name="Measurement" Relationship="MediaInventoryModel.FK_Recipe2Ingredient2Measurement_Measurements" FromRole="Recipe2Ingredient2Measurement" ToRole="Measurement" />
+    <NavigationProperty Name="Recipe" Relationship="MediaInventoryModel.FK_Recipe2Ingredient2Measurement_Recipes" FromRole="Recipe2Ingredient2Measurement" ToRole="Recipe" />
+  </EntityType>
+  <EntityType Name="Recipe">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Directions" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Recipe2Ingredient2Measurement" Relationship="MediaInventoryModel.FK_Recipe2Ingredient2Measurement_Recipes" FromRole="Recipe" ToRole="Recipe2Ingredient2Measurement" />
+  </EntityType>
+  <Association Name="FK_Recipe2Ingredient2Measurement_Ingredients">
+    <End Type="MediaInventoryModel.Ingredient" Role="Ingredient" Multiplicity="1" />
+    <End Type="MediaInventoryModel.Recipe2Ingredient2Measurement" Role="Recipe2Ingredient2Measurement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ingredient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Recipe2Ingredient2Measurement">
+        <PropertyRef Name="INGid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recipe2Ingredient2Measurement_Measurements">
+    <End Type="MediaInventoryModel.Measurement" Role="Measurement" Multiplicity="1" />
+    <End Type="MediaInventoryModel.Recipe2Ingredient2Measurement" Role="Recipe2Ingredient2Measurement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Measurement">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Recipe2Ingredient2Measurement">
+        <PropertyRef Name="MEAid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recipe2Ingredient2Measurement_Recipes">
+    <End Type="MediaInventoryModel.Recipe" Role="Recipe" Multiplicity="1" />
+    <End Type="MediaInventoryModel.Recipe2Ingredient2Measurement" Role="Recipe2Ingredient2Measurement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recipe">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Recipe2Ingredient2Measurement">
+        <PropertyRef Name="RECid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

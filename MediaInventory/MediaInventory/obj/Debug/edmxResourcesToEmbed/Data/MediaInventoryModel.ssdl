@@ -33,6 +33,13 @@
     <Property Name="forId" Type="int" Nullable="false" />
     <Property Name="forName" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
+  <EntityType Name="Ingredients">
+    <Key>
+      <PropertyRef Name="ingId" />
+    </Key>
+    <Property Name="ingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ingName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
   <EntityType Name="InventoryUser">
     <Key>
       <PropertyRef Name="useId" />
@@ -52,6 +59,14 @@
     <Property Name="useAnswer3" Type="nvarchar(max)" Nullable="false" />
     <Property Name="useROLid" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Measurements">
+    <Key>
+      <PropertyRef Name="meaId" />
+    </Key>
+    <Property Name="meaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="meaName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="meaAbbreviation" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="Movie">
     <Key>
       <PropertyRef Name="movId" />
@@ -63,6 +78,28 @@
     <Property Name="movIsOwned" Type="bit" Nullable="false" />
     <Property Name="movIsWanted" Type="bit" Nullable="false" />
     <Property Name="movFORId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Recipe2Ingredient2Measurement">
+    <Key>
+      <PropertyRef Name="rimINGid" />
+      <PropertyRef Name="rimMEAid" />
+      <PropertyRef Name="rimRECid" />
+    </Key>
+    <Property Name="rimId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rimINGid" Type="int" Nullable="false" />
+    <Property Name="rimMEAid" Type="int" Nullable="false" />
+    <Property Name="rimRECid" Type="int" Nullable="false" />
+    <Property Name="rimQuantity" Type="decimal" Precision="3" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Recipes">
+    <Key>
+      <PropertyRef Name="recId" />
+    </Key>
+    <Property Name="recId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="recName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="recDescription" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="recImage" Type="varbinary(max)" />
+    <Property Name="recDirections" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="SecurityQuestion">
     <Key>
@@ -183,12 +220,52 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Recipe2Ingredient2Measurement_Ingredients">
+    <End Role="Ingredients" Type="Self.Ingredients" Multiplicity="1" />
+    <End Role="Recipe2Ingredient2Measurement" Type="Self.Recipe2Ingredient2Measurement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ingredients">
+        <PropertyRef Name="ingId" />
+      </Principal>
+      <Dependent Role="Recipe2Ingredient2Measurement">
+        <PropertyRef Name="rimINGid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recipe2Ingredient2Measurement_Measurements">
+    <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
+    <End Role="Recipe2Ingredient2Measurement" Type="Self.Recipe2Ingredient2Measurement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Measurements">
+        <PropertyRef Name="meaId" />
+      </Principal>
+      <Dependent Role="Recipe2Ingredient2Measurement">
+        <PropertyRef Name="rimMEAid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recipe2Ingredient2Measurement_Recipes">
+    <End Role="Recipes" Type="Self.Recipes" Multiplicity="1" />
+    <End Role="Recipe2Ingredient2Measurement" Type="Self.Recipe2Ingredient2Measurement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recipes">
+        <PropertyRef Name="recId" />
+      </Principal>
+      <Dependent Role="Recipe2Ingredient2Measurement">
+        <PropertyRef Name="rimRECid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="MediaInventoryModelStoreContainer">
     <EntitySet Name="CheckOutHistory" EntityType="Self.CheckOutHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Format" EntityType="Self.Format" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ingredients" EntityType="Self.Ingredients" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InventoryUser" EntityType="Self.InventoryUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Measurements" EntityType="Self.Measurements" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Recipe2Ingredient2Measurement" EntityType="Self.Recipe2Ingredient2Measurement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Recipes" EntityType="Self.Recipes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SecurityQuestion" EntityType="Self.SecurityQuestion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SecurityRole" EntityType="Self.SecurityRole" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
@@ -223,6 +300,18 @@
     <AssociationSet Name="FK_Movie_Format" Association="Self.FK_Movie_Format">
       <End Role="Format" EntitySet="Format" />
       <End Role="Movie" EntitySet="Movie" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe2Ingredient2Measurement_Ingredients" Association="Self.FK_Recipe2Ingredient2Measurement_Ingredients">
+      <End Role="Ingredients" EntitySet="Ingredients" />
+      <End Role="Recipe2Ingredient2Measurement" EntitySet="Recipe2Ingredient2Measurement" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe2Ingredient2Measurement_Measurements" Association="Self.FK_Recipe2Ingredient2Measurement_Measurements">
+      <End Role="Measurements" EntitySet="Measurements" />
+      <End Role="Recipe2Ingredient2Measurement" EntitySet="Recipe2Ingredient2Measurement" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe2Ingredient2Measurement_Recipes" Association="Self.FK_Recipe2Ingredient2Measurement_Recipes">
+      <End Role="Recipes" EntitySet="Recipes" />
+      <End Role="Recipe2Ingredient2Measurement" EntitySet="Recipe2Ingredient2Measurement" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

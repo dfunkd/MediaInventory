@@ -96,5 +96,44 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Ingredients">
+      <EntityTypeMapping TypeName="MediaInventoryModel.Ingredient">
+        <MappingFragment StoreEntitySet="Ingredients">
+          <ScalarProperty Name="Name" ColumnName="ingName" />
+          <ScalarProperty Name="Id" ColumnName="ingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Measurements">
+      <EntityTypeMapping TypeName="MediaInventoryModel.Measurement">
+        <MappingFragment StoreEntitySet="Measurements">
+          <ScalarProperty Name="Abbreviation" ColumnName="meaAbbreviation" />
+          <ScalarProperty Name="Name" ColumnName="meaName" />
+          <ScalarProperty Name="Id" ColumnName="meaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Recipe2Ingredient2Measurement">
+      <EntityTypeMapping TypeName="MediaInventoryModel.Recipe2Ingredient2Measurement">
+        <MappingFragment StoreEntitySet="Recipe2Ingredient2Measurement">
+          <ScalarProperty Name="Quantity" ColumnName="rimQuantity" />
+          <ScalarProperty Name="RECid" ColumnName="rimRECid" />
+          <ScalarProperty Name="MEAid" ColumnName="rimMEAid" />
+          <ScalarProperty Name="INGid" ColumnName="rimINGid" />
+          <ScalarProperty Name="Id" ColumnName="rimId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Recipes">
+      <EntityTypeMapping TypeName="MediaInventoryModel.Recipe">
+        <MappingFragment StoreEntitySet="Recipes">
+          <ScalarProperty Name="Directions" ColumnName="recDirections" />
+          <ScalarProperty Name="Image" ColumnName="recImage" />
+          <ScalarProperty Name="Description" ColumnName="recDescription" />
+          <ScalarProperty Name="Name" ColumnName="recName" />
+          <ScalarProperty Name="Id" ColumnName="recId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

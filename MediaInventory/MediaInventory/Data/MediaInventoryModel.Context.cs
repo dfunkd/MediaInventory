@@ -33,5 +33,9 @@ namespace MediaInventory.Data
         public virtual DbSet<SecurityQuestion> SecurityQuestions { get; set; }
         public virtual DbSet<SecurityRole> SecurityRoles { get; set; }
         public virtual DbSet<State> States { get; set; }
+        public virtual DbSet<Ingredient> Ingredients { get; set; }
+        public virtual DbSet<Measurement> Measurements { get; set; }
+        public virtual DbSet<Recipe2Ingredient2Measurement> Recipe2Ingredient2Measurement { get; set; }
+        public virtual DbSet<Recipe> Recipes { get; set; }
     }
 }

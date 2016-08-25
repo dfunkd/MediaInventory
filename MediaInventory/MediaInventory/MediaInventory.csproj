@@ -121,10 +121,16 @@
     <Compile Include="Data\Format.cs">
       <DependentUpon>MediaInventoryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\Ingredient.cs">
+      <DependentUpon>MediaInventoryModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\InventoryUser.cs">
       <DependentUpon>MediaInventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\InventoryUserExt.cs" />
+    <Compile Include="Data\Measurement.cs">
+      <DependentUpon>MediaInventoryModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\MediaInventoryModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -144,6 +150,12 @@
       <DependentUpon>MediaInventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\MovieExt.cs" />
+    <Compile Include="Data\Recipe.cs">
+      <DependentUpon>MediaInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Recipe2Ingredient2Measurement.cs">
+      <DependentUpon>MediaInventoryModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\SecurityQuestion.cs">
       <DependentUpon>MediaInventoryModel.tt</DependentUpon>
     </Compile>
