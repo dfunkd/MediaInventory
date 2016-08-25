@@ -100,6 +100,10 @@
     <Property Name="recDescription" Type="nvarchar(max)" Nullable="false" />
     <Property Name="recImage" Type="varbinary(max)" />
     <Property Name="recDirections" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="recValuation" Type="bit" />
+    <Property Name="recRecipeAcquiredFrom" Type="nvarchar(max)" />
+    <Property Name="PrepTimeMinutes" Type="int" />
+    <Property Name="CookTimeMinutes" Type="int" />
   </EntityType>
   <EntityType Name="SecurityQuestion">
     <Key>

@@ -59,6 +59,20 @@
                     <search:SearchCustomers x:Name="searchCustomers" DockPanel.Dock="Top" Margin="0" />
                 </DockPanel>
             </TabItem>
+            <TabItem Header="Recipes" Margin="1, 0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                     IsSelected="{Binding ElementName=search, Path=InventoryType, Converter={StaticResource InventoryTypeToIsCheckedConverter}, ConverterParameter={x:Static resources:InventoryTypes.Recipes}}">
+                <TabItem.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform />
+                        <SkewTransform />
+                        <RotateTransform />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </TabItem.RenderTransform>
+                <DockPanel LastChildFill="True" Background="#FF373737" VerticalAlignment="Top">
+                    <search:SearchRecipes x:Name="searchRecipes" DockPanel.Dock="Top" Margin="0" />
+                </DockPanel>
+            </TabItem>
         </TabControl>
     </DockPanel>
 </UserControl>

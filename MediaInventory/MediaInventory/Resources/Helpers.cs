@@ -9,6 +9,7 @@ using System.Windows.Media;
 using MediaInventory.Data;
 using System.Windows.Input;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace MediaInventory.Resources
 {
@@ -279,6 +280,38 @@ namespace MediaInventory.Resources
             // Change keyboard focus.
             if (elementWithFocus != null)
                 elementWithFocus.MoveFocus(request);
+        }
+        public static BitmapImage BytesToImageSource(byte[] imageData)
+        {
+            if (imageData == null || imageData.Length == 0) return null;
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(imageData))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return image;
+        }
+        public static byte[] ImageSourceToBytes(BitmapEncoder encoder, ImageSource source)
+        {
+            byte[] bytes = null;
+            var bitmapSource = source as BitmapSource;
+            if (bitmapSource != null)
+            {
+                encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+                using (var ms = new MemoryStream())
+                {
+                    encoder.Save(ms);
+                    bytes = ms.ToArray();
+                }
+            }
+            return bytes;
         }
     }
 }

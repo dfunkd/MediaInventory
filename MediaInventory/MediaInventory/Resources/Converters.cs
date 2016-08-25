@@ -5,13 +5,69 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using TMDbLib.Objects.General;
 
 namespace MediaInventory.Resources
 {
     #region Multi Value Converters
+    public class MeasurementConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            string errorString = string.Empty;
+            if (!(string.IsNullOrWhiteSpace(values[0].ToString()) && string.IsNullOrWhiteSpace(values[1].ToString())))
+            {
+                decimal qty;
+                if (!decimal.TryParse(values[0].ToString(), out qty))
+                    errorString = "Invalid Quantity";
+                return string.IsNullOrWhiteSpace(errorString) ? string.Format("{0} {1}", qty, values[1].ToString()) : errorString;
+            }
+            return "Invalid Quantity or Measurement value passed in.";
+        }
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class TotalPrepCookTimeConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            int totalMinutes = 0;
+            foreach (var value in values)
+            {
+                if (!(value is int))
+                    return null;
+                int minutes;
+                if (int.TryParse(value.ToString(), out minutes))
+                    totalMinutes += minutes;
+            }
+            var ts = TimeSpan.FromMinutes(totalMinutes);
+            return ts.ToString(@"h:mm");
+        }
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
     #endregion
     #region Value Converters
+    public class BinaryToImageConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!(value is byte[]))
+                return null;
+            return Helpers.BytesToImageSource(value as byte[]);
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!(value is ImageSource))
+                return null;
+            return Helpers.ImageSourceToBytes(new PngBitmapEncoder(), value as ImageSource);
+        }
+    }
     public class BooleanTrueToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -320,6 +376,27 @@ namespace MediaInventory.Resources
             throw new NotSupportedException();
         }
     }
+    public class PrepCookTimeConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!(value is int))
+                return null;
+            int minutes;
+            int.TryParse(value.ToString(), out minutes);
+            var ts = TimeSpan.FromMinutes(minutes);
+            return ts.ToString(@"h\:mm");
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (string.IsNullOrWhiteSpace(value.ToString()))
+                return null;
+            TimeSpan ts;
+            if (!TimeSpan.TryParse(value.ToString(), out ts))
+                return null;
+            return ts.TotalMinutes;
+        }
+    }
     public class StringContentToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -329,7 +406,42 @@ namespace MediaInventory.Resources
             var stringValue = value is string ? (string)value : value.ToString();
             return stringValue.HasContent() ? Visibility.Visible : Visibility.Collapsed;
         }
-
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class ValuationTextConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!(value is Recipe))
+                return string.Empty;
+            var recipe = value as Recipe;
+            if (recipe.Valuation == null)
+                return "Unknown";
+            return recipe.Valuation.Value ? "Good" : "Bad";
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class ValuationBackgroundColorConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is Recipe)
+            {
+                var recipe = value as Recipe;
+                if (!recipe.Valuation.HasValue)
+                    return (SolidColorBrush)new BrushConverter().ConvertFrom("#FFB2B365");
+                if (recipe.Valuation.Value)
+                    return (SolidColorBrush)new BrushConverter().ConvertFrom("#FF5CA461");
+                return (SolidColorBrush)new BrushConverter().ConvertFrom("#FFB46765");
+            }
+            return (SolidColorBrush)new BrushConverter().ConvertFrom("#FF6A6A6A");
+        }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();

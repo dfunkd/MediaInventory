@@ -19,7 +19,9 @@ namespace MediaInventory.Resources
         [Description("Books")]
         Books = 3,
         [Description("Customers")]
-        Customers = 4
+        Customers = 4,
+        [Description("Recipes")]
+        Recipes = 5
     }
     public enum MovieGroupHeaderTypes
     {

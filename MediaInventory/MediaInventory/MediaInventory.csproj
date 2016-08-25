@@ -213,6 +213,9 @@
     <Compile Include="UserControls\InventorySettings.xaml.cs">
       <DependentUpon>InventorySettings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SearchRecipes.xaml.cs">
+      <DependentUpon>SearchRecipes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\CheckOutToCustomer.xaml.cs">
       <DependentUpon>CheckOutToCustomer.xaml</DependentUpon>
     </Compile>
@@ -315,6 +318,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\InventorySettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SearchRecipes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

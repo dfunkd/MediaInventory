@@ -299,6 +299,10 @@
     <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
     <Property Name="Directions" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Recipe2Ingredient2Measurement" Relationship="MediaInventoryModel.FK_Recipe2Ingredient2Measurement_Recipes" FromRole="Recipe" ToRole="Recipe2Ingredient2Measurement" />
+    <Property Name="Valuation" Type="Boolean" />
+    <Property Name="recRecipeAcquiredFrom" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PrepTimeMinutes" Type="Int32" />
+    <Property Name="CookTimeMinutes" Type="Int32" />
   </EntityType>
   <Association Name="FK_Recipe2Ingredient2Measurement_Ingredients">
     <End Type="MediaInventoryModel.Ingredient" Role="Ingredient" Multiplicity="1" />

@@ -1,0 +1,165 @@
+﻿<UserControl x:Class="MediaInventory.UserControls.SearchRecipes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:local="clr-namespace:MediaInventory.UserControls"
+             xmlns:uc="clr-namespace:MediaInventory.UserControls"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Focusable="True"
+             IsTabStop="True"
+             Loaded="searchRecipes_Loaded"
+             x:Name="searchRecipes">
+
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="cvsRecipes" />
+        <Style x:Key="{x:Type DataGridCell}" TargetType="{x:Type DataGridCell}">
+            <Setter Property="Background" Value="{x:Null}" />
+            <Setter Property="BorderBrush" Value="{x:Null}" />
+            <Setter Property="Foreground" Value="White" />
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{x:Null}" />
+                    <Setter Property="BorderBrush" Value="{x:Null}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <DockPanel Margin="5, 0, 5, 5" LastChildFill="True" HorizontalAlignment="Stretch">
+        <uc:AnimatedWatermarkTextBox x:Name="txtSearchCriteria" DockPanel.Dock="Top" Margin="5" HeaderText="Search Recipes..." />
+        <DataGrid x:Name="dgRecipes" DockPanel.Dock="Top" Margin="5" MaxHeight="500" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" RowHeaderWidth="0"
+                  SelectionChanged="dgRecipes_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Disabled" DataContext="{Binding RelativeSource={RelativeSource Self}}" DataGridCell.GotFocus="dgRecipes_GotFocus">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Recipe" Width="*" Binding="{Binding Path=Name, Mode=OneWay}" />
+            </DataGrid.Columns>
+            <DataGrid.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                                        <DockPanel LastChildFill="False" Background="#FF354B6C">
+                                            <RadioButton x:Name="tbExpand" DockPanel.Dock="Top" Click="OnExpandClick">
+                                                <DockPanel>
+                                                    <Path x:Name="path" Fill="White" Data="M0,6L12,6 6,0z" />
+                                                    <TextBlock FontWeight="Bold" Text="{Binding Path=ItemCount, StringFormat={}{0} }" Margin="5, 0, 0, 0" />
+                                                    <TextBlock FontWeight="Bold" Text="{Binding Path=Name, Converter={StaticResource RecipeGroupHeaderConverter}}" Margin="5, 0, 0, 0" />
+                                                    <TextBlock FontWeight="Bold" Text="{Binding Path=ItemCount, Converter={StaticResource RecipeGroupHeaderPluralConverter}}" />
+                                                </DockPanel>
+                                            </RadioButton>
+                                            <DockPanel x:Name="dpItemPresenter" DockPanel.Dock="Top" LastChildFill="True" Visibility="{Binding IsChecked, ElementName=tbExpand, Converter={StaticResource BooleanTrueToVisibilityConverter}}">
+                                                <ItemsPresenter DockPanel.Dock="Top" />
+                                            </DockPanel>
+                                        </DockPanel>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </DataGrid.GroupStyle>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <DockPanel LastChildFill="False">
+                        <Border DockPanel.Dock="Left" BorderBrush="Black" BorderThickness="1" Margin="5" VerticalAlignment="Top" Visibility="{Binding Path=Image, Converter={StaticResource NullToVisibilityConverter}}">
+                            <Image Height="200" Source="{Binding Image, Converter={StaticResource BinaryToImageConverter}}" />
+                        </Border>
+                        <DockPanel DockPanel.Dock="Top" LastChildFill="False" Margin="0">
+                            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                                <TextBlock Margin="5, 0" Text="Prep Time" />
+                                <TextBlock Margin="5, 0" Text="{Binding PrepTimeMinutes, Converter={StaticResource PrepCookTimeConverter}}" />
+                            </StackPanel>
+                            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                                <TextBlock Margin="5, 0" Text="Cook Time" />
+                                <TextBlock Margin="5, 0" Text="{Binding CookTimeMinutes, Converter={StaticResource PrepCookTimeConverter}}" />
+                            </StackPanel>
+                            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                                <TextBlock Margin="5, 0" Text="Total Time" />
+                                <TextBlock Margin="5, 0" FontWeight="Bold">
+                                    <TextBlock.Text>
+                                        <MultiBinding Converter="{StaticResource TotalPrepCookTimeConverter}">
+                                            <Binding Path="PrepTimeMinutes" />
+                                            <Binding Path="CookTimeMinutes" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </StackPanel>
+                        </DockPanel>
+                        <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Left" Visibility="{Binding Homepage, Converter={StaticResource NullToVisibilityConverter}}">
+                            <Hyperlink NavigateUri="{Binding RecipeAcquiredFrom}" RequestNavigate="Hyperlink_RequestNavigate">
+                                Recipe Origin
+                            </Hyperlink>
+                        </TextBlock>
+                        <Rectangle DockPanel.Dock="Top" Height="2" HorizontalAlignment="Stretch" Fill="Black" />
+                        <DockPanel DockPanel.Dock="Top" LastChildFill="True" Margin="0">
+                            <DockPanel DockPanel.Dock="Left" LastChildFill="True">
+                                <TextBlock DockPanel.Dock="Top" FontWeight="Bold" Text="Ingredients" />
+                                <ListBox x:Name="lsbIngredients" ItemsSource="{Binding Path=Recipe2Ingredient2Measurement}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" HorizontalAlignment="Right">
+                                                    <TextBlock.Text>
+                                                        <MultiBinding Converter="{StaticResource MeasurementConverter}">
+                                                            <Binding Path="Quantity" />
+                                                            <Binding ElementName="Measurement" Path="Name" />
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text="{Binding ElementName=Ingredient, Path=Name}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Left" LastChildFill="True">
+                                <TextBlock DockPanel.Dock="Top" FontWeight="Bold" Text="Directions" />
+                                <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Text="{Binding Direction}" />
+                            </DockPanel>
+                        </DockPanel>
+                        <DockPanel DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" LastChildFill="True" Margin="5">
+                            <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Right" LastChildFill="False" Margin="5">
+                                <!--<RadioButton x:Name="rdoIsCheckedOut" DockPanel.Dock="Top" Margin="8" HorizontalAlignment="Left" Click="rdoIsCheckedOut_Click"
+                                         Content="{Binding IsCheckedOut, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IsCheckedOutToTextConverter}}"
+                                         Background="{Binding IsCheckedOut, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IsCheckedOutToBackgroundColorConverter}}"
+                                         IsChecked="{Binding IsCheckedOut, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Converter={StaticResource CheckOutEnabledConverter}}" />-->
+                                <ToggleButton DockPanel.Dock="Top" Margin="8" Content="{Binding Converter={StaticResource ValuationTextConverter}}" Background="{Binding Converter={StaticResource ValuationBackgroundColorConverter}}"
+                                              Command="local:SearchRecipes.ChangeValuation">
+                                    <ToggleButton.CommandBindings>
+                                        <CommandBinding Command="local:SearchRecipes.ChangeValuation" CanExecute="CanChangeValuation" Executed="ChangeValuationExecuted" />
+                                    </ToggleButton.CommandBindings>
+                                    <ToggleButton.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </ToggleButton.RenderTransform>
+                                </ToggleButton>
+                            </DockPanel>
+                        </DockPanel>
+                    </DockPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+            <!--<DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Setter Property="Foreground" Value="White" />
+                    <EventSetter Event="PreviewMouseLeftButtonDown" Handler="OnSelectRowDetails"/>
+                    <Style.Triggers>
+                        <Trigger Property="AlternationIndex" Value="0">
+                            <Setter Property="Background" Value="{Binding IsCheckedOut, Converter={StaticResource IsCheckedOutToRowColorConverter}}" />
+                        </Trigger>
+                        <Trigger Property="AlternationIndex" Value="1">
+                            <Setter Property="Background" Value="{Binding IsCheckedOut, Converter={StaticResource IsCheckedOutToAlternateRowColorConverter}}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>-->
+        </DataGrid>
+    </DockPanel>
+</UserControl>

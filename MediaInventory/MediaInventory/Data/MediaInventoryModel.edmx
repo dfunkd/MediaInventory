@@ -105,6 +105,10 @@
           <Property Name="recDescription" Type="nvarchar(max)" Nullable="false" />
           <Property Name="recImage" Type="varbinary(max)" />
           <Property Name="recDirections" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="recValuation" Type="bit" />
+          <Property Name="recRecipeAcquiredFrom" Type="nvarchar(max)" />
+          <Property Name="PrepTimeMinutes" Type="int" />
+          <Property Name="CookTimeMinutes" Type="int" />
         </EntityType>
         <EntityType Name="SecurityQuestion">
           <Key>
@@ -622,6 +626,10 @@
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Directions" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Recipe2Ingredient2Measurement" Relationship="MediaInventoryModel.FK_Recipe2Ingredient2Measurement_Recipes" FromRole="Recipe" ToRole="Recipe2Ingredient2Measurement" />
+          <Property Name="Valuation" Type="Boolean" />
+          <Property Name="recRecipeAcquiredFrom" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PrepTimeMinutes" Type="Int32" />
+          <Property Name="CookTimeMinutes" Type="Int32" />
         </EntityType>
         <Association Name="FK_Recipe2Ingredient2Measurement_Ingredients">
           <End Type="MediaInventoryModel.Ingredient" Role="Ingredient" Multiplicity="1" />
@@ -791,6 +799,10 @@
           <EntitySetMapping Name="Recipes">
             <EntityTypeMapping TypeName="MediaInventoryModel.Recipe">
               <MappingFragment StoreEntitySet="Recipes">
+                <ScalarProperty Name="CookTimeMinutes" ColumnName="CookTimeMinutes" />
+                <ScalarProperty Name="PrepTimeMinutes" ColumnName="PrepTimeMinutes" />
+                <ScalarProperty Name="recRecipeAcquiredFrom" ColumnName="recRecipeAcquiredFrom" />
+                <ScalarProperty Name="Valuation" ColumnName="recValuation" />
                 <ScalarProperty Name="Directions" ColumnName="recDirections" />
                 <ScalarProperty Name="Image" ColumnName="recImage" />
                 <ScalarProperty Name="Description" ColumnName="recDescription" />

@@ -241,3 +241,5 @@ C:\GitPersonalRepo\MediaInventory\MediaInventory\MediaInventory\obj\Debug\Window
 C:\GitPersonalRepo\MediaInventory\MediaInventory\MediaInventory\obj\Debug\MediaInventory.g.resources
 C:\GitPersonalRepo\MediaInventory\MediaInventory\MediaInventory\obj\Debug\MediaInventory.Properties.Resources.resources
 C:\GitPersonalRepo\MediaInventory\MediaInventory\MediaInventory\obj\Debug\MediaInventory.csproj.GenerateResource.Cache
+C:\GitRepo\MediaInventory\MediaInventory\obj\Debug\UserControls\SearchRecipes.g.cs
+C:\GitRepo\MediaInventory\MediaInventory\obj\Debug\UserControls\SearchRecipes.baml

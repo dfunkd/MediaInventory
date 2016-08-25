@@ -26,6 +26,8 @@ namespace MediaInventory.Resources
         private Customer _selectedCustomer = null;
         private Movie _selectedMovie = null;
         private MovieGroupHeaderTypes _movieGroupHeaderType = MovieGroupHeaderTypes.None;
+        private Recipe _selectedRecipe = null;
+        //private RecipeGroupHeaderTypes _recipeGroupHeaderType = RecipeGroupHeaderTypes.None;
         private int _timeoutPeriod = 300;
         #endregion
         #region Public Properties
@@ -191,6 +193,30 @@ namespace MediaInventory.Resources
                 }
             }
         }
+        public Recipe SelectedRecipe
+        {
+            get { return _selectedRecipe; }
+            set
+            {
+                if (_selectedRecipe != value)
+                {
+                    _selectedRecipe = value;
+                    RaisePropertyChanged("SelectedRecipe");
+                }
+            }
+        }
+        //public RecipeGroupHeaderTypes RecipeGroupHeaderType
+        //{
+        //    get { return _recipeGroupHeaderType; }
+        //    set
+        //    {
+        //        if (_recipeGroupHeaderType != value)
+        //        {
+        //            _recipeGroupHeaderType = value;
+        //            RaisePropertyChanged("RecipeGroupHeaderType");
+        //        }
+        //    }
+        //}
         public int TimeoutPeriod
         {
             get { return _timeoutPeriod; }

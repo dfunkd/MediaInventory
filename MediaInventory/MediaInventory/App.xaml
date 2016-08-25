@@ -8,6 +8,7 @@
              x:Name="appXaml">
 
     <Application.Resources>
+        <conv:BinaryToImageConverter x:Key="BinaryToImageConverter" />
         <conv:BooleanTrueToVisibilityConverter x:Key="BooleanTrueToVisibilityConverter" />
         <conv:CheckOutEnabledConverter x:Key="CheckOutEnabledConverter" />
         <conv:DateTimeToDateAndTimeOrNullConverter x:Key="DateTimeToDateAndTimeOrNullConverter" />
@@ -21,12 +22,17 @@
         <conv:IsCheckedOutToTextConverter x:Key="IsCheckedOutToTextConverter" />
         <conv:IsWantedOwnedBackgroumdConnverter x:Key="IsWantedOwnedBackgroumdConnverter" />
         <conv:IsWantedOwnedTextConverter x:Key="IsWantedOwnedTextConverter" />
+        <conv:MeasurementConverter x:Key="MeasurementConverter" />
         <conv:MovieGroupHeaderConverter x:Key="MovieGroupHeaderConverter" />
         <conv:MovieGroupHeaderPluralConverter x:Key="MovieGroupHeaderPluralConverter" />
         <conv:NullToCollapsedConverter x:Key="NullToCollapsedConverter" />
         <conv:NullToStringConverter x:Key="NullToStringConverter" />
         <conv:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+        <conv:PrepCookTimeConverter x:Key="PrepCookTimeConverter" />
         <conv:StringContentToVisibilityConverter x:Key="StringContentToVisibilityConverter" />
+        <conv:TotalPrepCookTimeConverter x:Key="TotalPrepCookTimeConverter" />
+        <conv:ValuationBackgroundColorConverter x:Key="ValuationBackgroundColorConverter" />
+        <conv:ValuationTextConverter x:Key="ValuationTextConverter" />
         <!--Linear Graient Brushes-->
         <LinearGradientBrush x:Key="HeaderContentControlBackground" EndPoint="0.5,0" StartPoint="0.5,1">
             <GradientStop Color="#FF058686" Offset="0" />
@@ -420,6 +426,14 @@
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
+            </Style.Triggers>
+        </Style>
+        <!--DataGrid Styles-->
+        <Style TargetType="{x:Type DataGrid}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Items.Count, RelativeSource={RelativeSource Self}}" Value="0">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
             </Style.Triggers>
         </Style>
         <!--DataGridColumnHeader Styles-->
