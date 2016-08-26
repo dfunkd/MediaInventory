@@ -328,3 +328,7 @@ C:\Users\Dylan\Source\Repos\MediaInventory\MediaInventory\MediaInventory\obj\Deb
 C:\Users\Dylan\Source\Repos\MediaInventory\MediaInventory\MediaInventory\obj\Debug\MediaInventory.g.resources
 C:\Users\Dylan\Source\Repos\MediaInventory\MediaInventory\MediaInventory\obj\Debug\MediaInventory.Properties.Resources.resources
 C:\Users\Dylan\Source\Repos\MediaInventory\MediaInventory\MediaInventory\obj\Debug\MediaInventory.csproj.GenerateResource.Cache
+C:\GitPersonalRepo\MediaInventory\MediaInventory\MediaInventory\obj\Debug\UserControls\AddRecipe.g.cs
+C:\GitPersonalRepo\MediaInventory\MediaInventory\MediaInventory\obj\Debug\UserControls\SearchRecipes.g.cs
+C:\GitPersonalRepo\MediaInventory\MediaInventory\MediaInventory\obj\Debug\UserControls\AddRecipe.baml
+C:\GitPersonalRepo\MediaInventory\MediaInventory\MediaInventory\obj\Debug\UserControls\SearchRecipes.baml

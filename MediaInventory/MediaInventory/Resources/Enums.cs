@@ -52,6 +52,14 @@ namespace MediaInventory.Resources
         [Description("Home")]
         Home = 1
     }
+    public enum RecipeValuation
+    {
+        None = 0,
+        [Description("Good")]
+        Good = 1,
+        [Description("Bad")]
+        Bad = 2
+    }
     public enum SecurityRoles
     {
         None = 0,

@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Dylan\Source\Repos\MediaInventory\MediaInventory\MediaInventory\obj\Debug\
+C:\GitPersonalRepo\MediaInventory\MediaInventory\MediaInventory\obj\Debug\
 MediaInventory
 none
 false
 DEBUG;TRACE
-C:\Users\Dylan\Source\Repos\MediaInventory\MediaInventory\MediaInventory\App.xaml
+C:\GitPersonalRepo\MediaInventory\MediaInventory\MediaInventory\App.xaml
 19-218908791
 2-1888959361
 54-1306045485
-29-1973320380
+29991824826
 Inventory.xaml;UserControls\Add.xaml;UserControls\AddCustomer.xaml;UserControls\AddMovie.xaml;UserControls\AddRecipe.xaml;UserControls\AnimatedWatermarkPasswordBox.xaml;UserControls\AnimatedWatermarkTextBox.xaml;UserControls\Edit.xaml;UserControls\ForgotLoginPassword.xaml;UserControls\Login.xaml;UserControls\MaskedTextBoxWithHeader.xaml;UserControls\Search.xaml;UserControls\SearchCustomers.xaml;UserControls\SearchMovies.xaml;UserControls\InventorySettings.xaml;UserControls\SearchRecipes.xaml;Windows\CheckOutToCustomer.xaml;Windows\CustomMessageBox.xaml;Windows\ViewCheckOutHistoryWindow.xaml;
 
 False

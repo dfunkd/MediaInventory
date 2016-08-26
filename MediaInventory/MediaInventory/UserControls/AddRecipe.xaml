@@ -3,7 +3,7 @@
              xmlns:local="clr-namespace:MediaInventory.UserControls"
              xmlns:uc="clr-namespace:MediaInventory.UserControls"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Name="addMovie">
+             x:Name="addRecipe">
 
     <UserControl.Resources>
         <CollectionViewSource x:Key="cvsMovies" />
@@ -34,7 +34,7 @@
     </UserControl.Resources>
 
     <DockPanel LastChildFill="True">
-        <uc:AnimatedWatermarkTextBox x:Name="txtSearchCriteria" DockPanel.Dock="Top" Margin="5" HeaderText="Search Movies..." />
+        <uc:AnimatedWatermarkTextBox x:Name="txtSearchCriteria" DockPanel.Dock="Top" Margin="5" HeaderText="Recipe Name..." />
         <DockPanel DockPanel.Dock="Top" LastChildFill="False">
             <Button DockPanel.Dock="Left" Style="{DynamicResource NoChromeButton}" Click="OnImageClick">
                 <Border DockPanel.Dock="Left" BorderBrush="Black" BorderThickness="1" Margin="5" VerticalAlignment="Top" Visibility="{Binding Path=RecipeImage, Converter={StaticResource NullToVisibilityConverter}}">
@@ -53,6 +53,8 @@
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
                 <!--Row 0-->
                 <TextBlock Grid.Column="0" Grid.Row="0" FontWeight="Bold" Margin="4" Text="Prep. Time" HorizontalAlignment="Right" VerticalAlignment="Center" />
@@ -60,8 +62,7 @@
                 <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="0">
                     <RadioButton x:Name="rdoPrepHours" Content="Hours" IsChecked="True" GroupName="PrepGroup" Click="OnTimeScaleChanged" />
                     <RadioButton x:Name="rdoPrepMinutes" Content="Minutes" GroupName="PrepGroup" Click="OnTimeScaleChanged" />
-                </StackPanel>
-                
+                </StackPanel>                
                 <TextBlock Grid.Column="3" Grid.Row="0" FontWeight="Bold" Margin="4" Text="Cook Time" HorizontalAlignment="Right" VerticalAlignment="Center" />
                 <TextBox x:Name="txtCookTime" Grid.Column="4" Grid.Row="0" Margin="4" Width="30" TextChanged="OnTextChanged" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <StackPanel Orientation="Horizontal" Grid.Column="5" Grid.Row="0">
@@ -71,7 +72,145 @@
                 <!--Row 1-->
                 <TextBlock Grid.Column="0" Grid.Row="1" FontWeight="Bold" Margin="4" Text="Total Time" HorizontalAlignment="Right" VerticalAlignment="Center" />
                 <TextBlock x:Name="tbTotalTime" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Margin="4" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <!--Row 2-->
+                <Canvas Grid.Column="0" Grid.Row="2" Margin="4, 4, 0, 4" Width="24" Height="24">
+                    <Ellipse x:Name="ellValuation">
+                        <Ellipse.Style>
+                            <Style TargetType="{x:Type Ellipse}">
+                                <Setter Property="Height" Value="24" />
+                                <Setter Property="Width" Value="24" />
+                            </Style>
+                        </Ellipse.Style>
+                    </Ellipse>
+                    <Ellipse MouseLeftButtonDown="Ellipse_MouseLeftButtonDown" Canvas.Left="3" Canvas.Top="1">
+                        <Ellipse.Style>
+                            <Style TargetType="{x:Type Ellipse}">
+                                <Setter Property="Fill">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                            <GradientStop Color="#FFFFFFFF" Offset="0" />
+                                            <GradientStop Color="#00000000" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Height" Value="15" />
+                                <Setter Property="Width" Value="18" />
+                            </Style>
+                        </Ellipse.Style>
+                    </Ellipse>
+                </Canvas>
+                <uc:AnimatedWatermarkTextBox x:Name="txtAquiredFromUrl" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="2" Margin="4" HeaderText="Url For Recipe..." />
+                <TextBlock x:Name="test1" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Text="Not Evelauated Yet" />
+                <TextBlock x:Name="test2" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" Text="Not Evelauated Yet" />
+                <TextBlock x:Name="test3" Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="3" Text="Not Evelauated Yet" />
             </Grid>
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Bottom" LastChildFill="False" Margin="0">
+            <TextBlock DockPanel.Dock="Right" Margin="0, 4, 4, 4" Text="Not Good" FontWeight="Bold" VerticalAlignment="Center" />
+            <Canvas DockPanel.Dock="Right" Margin="4, 4, 0, 4" Width="24" Height="24">
+                <Ellipse>
+                    <Ellipse.Style>
+                        <Style TargetType="{x:Type Ellipse}">
+                            <Setter Property="Fill">
+                                <Setter.Value>
+                                    <RadialGradientBrush GradientOrigin=".5,.8" RadiusX="0.6">
+                                        <GradientStop Color="#FF6A0100" Offset="1" />
+                                        <GradientStop Color="#FFFF000C" Offset="0" />
+                                    </RadialGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Height" Value="24" />
+                            <Setter Property="Width" Value="24" />
+                        </Style>
+                    </Ellipse.Style>
+                </Ellipse>
+                <Ellipse Canvas.Left="3" Canvas.Top="1">
+                    <Ellipse.Style>
+                        <Style TargetType="{x:Type Ellipse}">
+                            <Setter Property="Fill">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="#FFFFFFFF" Offset="0" />
+                                        <GradientStop Color="#00000000" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Height" Value="15" />
+                            <Setter Property="Width" Value="18" />
+                        </Style>
+                    </Ellipse.Style>
+                </Ellipse>
+            </Canvas>
+            <TextBlock DockPanel.Dock="Right" Margin="0, 4, 4, 4" Text="N/A" FontWeight="Bold" VerticalAlignment="Center" />
+            <Canvas DockPanel.Dock="Right" Margin="4, 4, 0, 4" Width="24" Height="24">
+                <Ellipse>
+                    <Ellipse.Style>
+                        <Style TargetType="{x:Type Ellipse}">
+                            <Setter Property="Fill">
+                                <Setter.Value>
+                                    <RadialGradientBrush GradientOrigin=".5,.8" RadiusX="0.6">
+                                        <GradientStop Color="#FF6A5500" Offset="1" />
+                                        <GradientStop Color="#FFFFC500" Offset="0" />
+                                    </RadialGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Height" Value="24" />
+                            <Setter Property="Width" Value="24" />
+                        </Style>
+                    </Ellipse.Style>
+                </Ellipse>
+                <Ellipse Canvas.Left="3" Canvas.Top="1">
+                    <Ellipse.Style>
+                        <Style TargetType="{x:Type Ellipse}">
+                            <Setter Property="Fill">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="#FFFFFFFF" Offset="0" />
+                                        <GradientStop Color="#00000000" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Height" Value="15" />
+                            <Setter Property="Width" Value="18" />
+                        </Style>
+                    </Ellipse.Style>
+                </Ellipse>
+            </Canvas>
+            <TextBlock DockPanel.Dock="Right" Margin="0, 4, 4, 4" Text="Good" FontWeight="Bold" VerticalAlignment="Center" />
+            <Canvas DockPanel.Dock="Right" Margin="4, 4, 0, 4" Width="24" Height="24">
+                <Ellipse>
+                    <Ellipse.Style>
+                        <Style TargetType="{x:Type Ellipse}">
+                            <Setter Property="Fill">
+                                <Setter.Value>
+                                    <RadialGradientBrush GradientOrigin=".5,.8" RadiusX="0.6">
+                                        <GradientStop Color="#FF005502" Offset="1" />
+                                        <GradientStop Color="#FF15D600" Offset="0" />
+                                    </RadialGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Height" Value="24" />
+                            <Setter Property="Width" Value="24" />
+                        </Style>
+                    </Ellipse.Style>
+                </Ellipse>
+                <Ellipse Canvas.Left="3" Canvas.Top="1">
+                    <Ellipse.Style>
+                        <Style TargetType="{x:Type Ellipse}">
+                            <Setter Property="Fill">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="#FFFFFFFF" Offset="0" />
+                                        <GradientStop Color="#00000000" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Height" Value="15" />
+                            <Setter Property="Width" Value="18" />
+                        </Style>
+                    </Ellipse.Style>
+                </Ellipse>
+            </Canvas>
         </DockPanel>
         <Grid DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
@@ -79,16 +218,143 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <TextBlock Grid.Column="0" Grid.Row="0" FontWeight="Bold" Margin="4" Text="Ingredients" />
-            <!--Need to create datagrid for the Recipe Ingredients-->
-            <!--Need to create ComboBoxes to add ingredients-->
-            <Border Grid.Column="0" Grid.Row="1" MinHeight="200" MinWidth="200" Margin="4" Background="#FF262626" BorderBrush="#FFABADB3" BorderThickness="1" />            
+            <DataGrid x:Name="dgRecipeIngredients" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="4, 4, 4, 0" DataContext="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                      ItemsSource="{Binding ElementName=addRecipe, Path=RecipeIngredientList}" AutoGenerateColumns="False" AlternatingRowBackground="#FF7C97BE" RowBackground="#FF46638E" Background="Transparent" GridLinesVisibility="None"
+                      BorderBrush="Transparent" SelectionUnit="FullRow" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Height="150">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Quantity}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock Text="Quantity" Margin="4" />
+                        </DataGridTextColumn.Header>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Measurement.Name}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock Text="Measurement" Margin="4" />
+                        </DataGridTextColumn.Header>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Ingredient.Name}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock Text="Ingredient" Margin="4" />
+                        </DataGridTextColumn.Header>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid Grid.Column="0" Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <!--Row 0-->
+                <TextBlock Grid.Column="0" Grid.Row="0" FontWeight="Bold" Text="Quantity" />
+                <TextBlock Grid.Column="1" Grid.Row="0" FontWeight="Bold" Text="Measurement" />
+                <TextBlock Grid.Column="2" Grid.Row="0" FontWeight="Bold" Text="Ingredient" />
+                <!--Row 1-->
+                <TextBox x:Name="txtQuantity" Grid.Column="0" Grid.Row="1" Margin="4" HorizontalAlignment="Stretch" TextChanged="txtQuantity_TextChanged" />
+                <ComboBox x:Name="cboMeasurement" Grid.Column="1" Grid.Row="1" Margin="4" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=MeasurementList}" DisplayMemberPath="Name" SelectedValuePath="Name"
+                          SelectedValue="{Binding Path=Measurement}" SelectionChanged="cboMeasurement_SelectionChanged" />
+                <ComboBox x:Name="cboIngredient" Grid.Column="2" Grid.Row="1" Margin="4" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=IngredientList}" DisplayMemberPath="Name" SelectedValuePath="Name"
+                          SelectedValue="{Binding Path=Ingredient}" SelectionChanged="cboIngredient_SelectionChanged" />
+                <!--Row 2-->
+                <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btnAddIngredient" Grid.Column="0" Margin="4, 0, 0, 4" Content="Add" Style="{StaticResource NormalExpandingButtonStyle}" Command="local:AddRecipe.AddRecipeIngredient">
+                        <Button.CommandBindings>
+                            <CommandBinding Command="local:AddRecipe.AddRecipeIngredient" CanExecute="CanAddRecipeIngredient" Executed="AddRecipeIngredientExecuted" />
+                        </Button.CommandBindings>
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                    <Button x:Name="btnDeleteIngredient" Grid.Column="1" Margin="0, 0, 4, 4" Content="Delete" Style="{StaticResource CancelExpandingButtonStyle}" Command="local:AddRecipe.DeleteRecipeIngredient">
+                        <Button.CommandBindings>
+                            <CommandBinding Command="local:AddRecipe.DeleteRecipeIngredient" CanExecute="CanDeleteRecipeIngredient" Executed="DeleteRecipeIngredientExecuted" />
+                        </Button.CommandBindings>
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                </Grid>
+                <!--Row 3-->
+                <Button x:Name="btnNewIngredient" Grid.Column="1" Grid.Row="3" Margin="4, 0, 0, 4" Content="New Ingredient" Style="{StaticResource NormalExpandingButtonStyle}">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                </Button>
+                <Button x:Name="btnNewMeasurement" Grid.Column="2" Grid.Row="3" Margin="4, 0, 0, 4" Content="New Measurement" Style="{StaticResource NormalExpandingButtonStyle}">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                </Button>
+                <!--Row 4-->
+                <Button x:Name="btnAddRecipt" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" Margin="4" Content="Add Recipe" Style="{DynamicResource NormalExpandingButtonStyle}" Command="local:AddRecipe.AddNewRecipe">
+                    <Button.CommandBindings>
+                        <CommandBinding Command="local:AddRecipe.AddNewRecipe" CanExecute="CanAddNewRecipe" Executed="AddNewRecipeExecuted" />
+                    </Button.CommandBindings>
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                </Button>
+            </Grid>
             <TextBlock Grid.Column="1" Grid.Row="0" FontWeight="Bold" Margin="4" Text="Directions" />
             <TextBox x:Name="txtDirections" Grid.Column="1" Grid.Row="1" Margin="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextChanged="OnTextChanged" TextWrapping="Wrap" />
-            <RichTextBox x:Name="rtbDirections" Grid.Column="1" Grid.Row="1" Background="#FF262626" Margin="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextChanged="OnTextChanged" />
+            <RichTextBox x:Name="rtbDirections" Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" Background="#FF262626" Margin="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextChanged="OnTextChanged" />
         </Grid>
     </DockPanel>
 </UserControl>
