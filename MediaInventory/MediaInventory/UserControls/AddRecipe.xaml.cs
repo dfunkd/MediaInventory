@@ -45,6 +45,7 @@ namespace MediaInventory.UserControls
             {
                 ChangeRecipeImage(@"/MediaInventory;component/Resources/Images/no_photo.jpg");
                 imgRecipe.Source = RecipeImage;
+                CalculateTotalTime();
             };
             txtSearchCriteria.txtContent.TextChanged += (s, e) =>
             {
@@ -56,7 +57,7 @@ namespace MediaInventory.UserControls
             };
         }
         #region Events
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void OnImageClick(object sender, RoutedEventArgs e)
         {
             var dlg = new OpenFileDialog();
             dlg.DefaultExt = ".png";
@@ -69,8 +70,47 @@ namespace MediaInventory.UserControls
                 imgRecipe.Source = RecipeImage;
             }
         }
+        private void OnTimeScaleChanged(object sender, RoutedEventArgs e)
+        {
+            CalculateTotalTime();
+        }
+        private void OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            CalculateTotalTime();
+        }
         #endregion
         #region Private Methods
+        private void CalculateTotalTime()
+        {
+            int prepTime, cookTime;
+            if (!int.TryParse(txtPrepTime.Text, out prepTime))
+                prepTime = 0;
+            if (!int.TryParse(txtCookTime.Text, out cookTime))
+                cookTime = 0;
+            if (rdoPrepHours.IsChecked.Value)
+                prepTime = prepTime * 60;
+            if (rdoCookHours.IsChecked.Value)
+                cookTime = cookTime * 60;
+            var totalTime = prepTime + cookTime;
+            var ts = TimeSpan.FromMinutes(totalTime);
+            string dayString = string.Empty, hourString = string.Empty, minuteString = string.Empty;
+            if (ts.Days > 0)
+                dayString = ts.Days > 1 ? " Days" : " Day";
+            if (ts.Hours > 0)
+                hourString = ts.Minutes > 1 ? " Hours" : " Hour";
+            if (ts.Minutes > 0)
+                minuteString = ts.Minutes > 1 ? " Minutes" : " Minute";
+            string daysHoursMinutes;
+            if (!string.IsNullOrWhiteSpace(dayString))
+                daysHoursMinutes = string.Format("{0} {1}, {2} {3}, {4} {5}", ts.Days, dayString, ts.Hours, hourString, ts.Minutes, minuteString);
+            else if (!string.IsNullOrWhiteSpace(hourString))
+                daysHoursMinutes = string.Format("{0} {1}, {2} {3}", ts.Hours, hourString, ts.Minutes, minuteString);
+            else if (!string.IsNullOrWhiteSpace(minuteString))
+                daysHoursMinutes = string.Format("{0} {1}", ts.Minutes, minuteString);
+            else
+                daysHoursMinutes = "N/A";
+            tbTotalTime.Text = daysHoursMinutes;
+        }
         private void ChangeRecipeImage(string fileLocation)
         {
             RecipeImage = new BitmapImage();
@@ -79,16 +119,5 @@ namespace MediaInventory.UserControls
             RecipeImage.EndInit();
         }
         #endregion
-        private void OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            int prepTime, cookTime;
-            if (!int.TryParse(txtPrepTime.Text, out prepTime))
-                prepTime = 0;
-            if (!int.TryParse(txtCookTime.Text, out cookTime))
-                cookTime = 0;
-            var totalTime = prepTime + cookTime;
-            var ts = TimeSpan.FromMinutes(totalTime);
-            tbTotalTime.Text = string.Format("{0}:{1}", ts.Hours, ts.Minutes);
-        }
     }
 }

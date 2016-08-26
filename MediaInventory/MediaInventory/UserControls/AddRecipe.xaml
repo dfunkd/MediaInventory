@@ -36,30 +36,44 @@
     <DockPanel LastChildFill="True">
         <uc:AnimatedWatermarkTextBox x:Name="txtSearchCriteria" DockPanel.Dock="Top" Margin="5" HeaderText="Search Movies..." />
         <DockPanel DockPanel.Dock="Top" LastChildFill="False">
-            <Button DockPanel.Dock="Left" Style="{DynamicResource NoChromeButton}" Click="Button_Click">
+            <Button DockPanel.Dock="Left" Style="{DynamicResource NoChromeButton}" Click="OnImageClick">
                 <Border DockPanel.Dock="Left" BorderBrush="Black" BorderThickness="1" Margin="5" VerticalAlignment="Top" Visibility="{Binding Path=RecipeImage, Converter={StaticResource NullToVisibilityConverter}}">
                     <Image x:Name="imgRecipe" Height="200" />
                 </Border>
             </Button>
-            <Grid DockPanel.Dock="Left">
+            <Grid DockPanel.Dock="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
-                    <RowDefinition />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Column="0" Grid.Row="0" FontWeight="Bold" Margin="4" Text="Prep. Time (Minutes)" />
-                <TextBox x:Name="txtPrepTime" Grid.Column="1" Grid.Row="0" Margin="4" Width="100" TextChanged="OnTextChanged" />
-                <TextBlock Grid.Column="0" Grid.Row="1" FontWeight="Bold" Margin="4" Text="Prep. Time (Minutes)" />
-                <TextBox x:Name="txtCookTime" Grid.Column="1" Grid.Row="1" Margin="4" Width="100" TextChanged="OnTextChanged" />
-                <TextBlock Grid.Column="0" Grid.Row="2" FontWeight="Bold" Margin="4" Text="Prep. Time" />
-                <TextBlock x:Name="tbTotalTime" Grid.Column="1" Grid.Row="2" Margin="4" Width="100" />
+                <!--Row 0-->
+                <TextBlock Grid.Column="0" Grid.Row="0" FontWeight="Bold" Margin="4" Text="Prep. Time" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBox x:Name="txtPrepTime" Grid.Column="1" Grid.Row="0" Margin="4" Width="30" TextChanged="OnTextChanged" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="0">
+                    <RadioButton x:Name="rdoPrepHours" Content="Hours" IsChecked="True" GroupName="PrepGroup" Click="OnTimeScaleChanged" />
+                    <RadioButton x:Name="rdoPrepMinutes" Content="Minutes" GroupName="PrepGroup" Click="OnTimeScaleChanged" />
+                </StackPanel>
+                
+                <TextBlock Grid.Column="3" Grid.Row="0" FontWeight="Bold" Margin="4" Text="Cook Time" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBox x:Name="txtCookTime" Grid.Column="4" Grid.Row="0" Margin="4" Width="30" TextChanged="OnTextChanged" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <StackPanel Orientation="Horizontal" Grid.Column="5" Grid.Row="0">
+                    <RadioButton x:Name="rdoCookHours" Content="Hours" IsChecked="True" GroupName="CookGroup" Click="OnTimeScaleChanged" />
+                    <RadioButton x:Name="rdoCookMinutes" Content="Minutes" GroupName="CookGroup" Click="OnTimeScaleChanged" />
+                </StackPanel>
+                <!--Row 1-->
+                <TextBlock Grid.Column="0" Grid.Row="1" FontWeight="Bold" Margin="4" Text="Total Time" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock x:Name="tbTotalTime" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Margin="4" HorizontalAlignment="Left" VerticalAlignment="Center" />
             </Grid>
         </DockPanel>
-        <Grid DockPanel.Dock="Top" HorizontalAlignment="Stretch">
+        <Grid DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -71,8 +85,10 @@
             <TextBlock Grid.Column="0" Grid.Row="0" FontWeight="Bold" Margin="4" Text="Ingredients" />
             <!--Need to create datagrid for the Recipe Ingredients-->
             <!--Need to create ComboBoxes to add ingredients-->
+            <Border Grid.Column="0" Grid.Row="1" MinHeight="200" MinWidth="200" Margin="4" Background="#FF262626" BorderBrush="#FFABADB3" BorderThickness="1" />            
             <TextBlock Grid.Column="1" Grid.Row="0" FontWeight="Bold" Margin="4" Text="Directions" />
             <TextBox x:Name="txtDirections" Grid.Column="1" Grid.Row="1" Margin="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextChanged="OnTextChanged" TextWrapping="Wrap" />
+            <RichTextBox x:Name="rtbDirections" Grid.Column="1" Grid.Row="1" Background="#FF262626" Margin="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextChanged="OnTextChanged" />
         </Grid>
     </DockPanel>
 </UserControl>
