@@ -65,15 +65,18 @@
                 </StackPanel>                
                 <TextBlock Grid.Column="3" Grid.Row="0" FontWeight="Bold" Margin="4" Text="Cook Time" HorizontalAlignment="Right" VerticalAlignment="Center" />
                 <TextBox x:Name="txtCookTime" Grid.Column="4" Grid.Row="0" Margin="4" Width="30" TextChanged="OnTextChanged" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                <StackPanel Orientation="Horizontal" Grid.Column="5" Grid.Row="0">
+                <StackPanel x:Name="spHoursMinutes" Orientation="Horizontal" Grid.Column="5" Grid.Row="0">
                     <RadioButton x:Name="rdoCookHours" Content="Hours" IsChecked="True" GroupName="CookGroup" Click="OnTimeScaleChanged" />
                     <RadioButton x:Name="rdoCookMinutes" Content="Minutes" GroupName="CookGroup" Click="OnTimeScaleChanged" />
                 </StackPanel>
                 <!--Row 1-->
                 <TextBlock Grid.Column="0" Grid.Row="1" FontWeight="Bold" Margin="4" Text="Total Time" HorizontalAlignment="Right" VerticalAlignment="Center" />
                 <TextBlock x:Name="tbTotalTime" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Margin="4" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="3" Grid.Row="1" FontWeight="Bold" Margin="4" Text="Servings" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBox x:Name="txtServings" Grid.Column="4" Grid.ColumnSpan="3" Grid.Row="1" Margin="4, 4, 0, 4" TextChanged="OnTextChanged" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
                 <!--Row 2-->
-                <Canvas Grid.Column="0" Grid.Row="2" Margin="4, 4, 0, 4" Width="24" Height="24">
+                <uc:AnimatedWatermarkTextBox x:Name="txtAquiredFromUrl" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="2" Margin="4" HeaderText="Url For Recipe..." />
+                <Canvas Grid.Column="0" Grid.Row="3" Margin="4, 4, 0, 4" Width="24" Height="24">
                     <Ellipse x:Name="ellValuation">
                         <Ellipse.Style>
                             <Style TargetType="{x:Type Ellipse}">
@@ -99,118 +102,115 @@
                         </Ellipse.Style>
                     </Ellipse>
                 </Canvas>
-                <uc:AnimatedWatermarkTextBox x:Name="txtAquiredFromUrl" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="2" Margin="4" HeaderText="Url For Recipe..." />
-                <TextBlock x:Name="test1" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Text="Not Evelauated Yet" />
-                <TextBlock x:Name="test2" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" Text="Not Evelauated Yet" />
-                <TextBlock x:Name="test3" Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="3" Text="Not Evelauated Yet" />
+                <DockPanel Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="3" LastChildFill="False" Margin="0">
+                    <TextBlock DockPanel.Dock="Right" Margin="0, 4, 4, 4" Text="Not Good" FontWeight="Bold" VerticalAlignment="Center" />
+                    <Canvas DockPanel.Dock="Right" Margin="4, 4, 0, 4" Width="24" Height="24">
+                        <Ellipse>
+                            <Ellipse.Style>
+                                <Style TargetType="{x:Type Ellipse}">
+                                    <Setter Property="Fill">
+                                        <Setter.Value>
+                                            <RadialGradientBrush GradientOrigin=".5,.8" RadiusX="0.6">
+                                                <GradientStop Color="#FF6A0100" Offset="1" />
+                                                <GradientStop Color="#FFFF000C" Offset="0" />
+                                            </RadialGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Height" Value="24" />
+                                    <Setter Property="Width" Value="24" />
+                                </Style>
+                            </Ellipse.Style>
+                        </Ellipse>
+                        <Ellipse Canvas.Left="3" Canvas.Top="1">
+                            <Ellipse.Style>
+                                <Style TargetType="{x:Type Ellipse}">
+                                    <Setter Property="Fill">
+                                        <Setter.Value>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                <GradientStop Color="#FFFFFFFF" Offset="0" />
+                                                <GradientStop Color="#00000000" Offset="1" />
+                                            </LinearGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Height" Value="15" />
+                                    <Setter Property="Width" Value="18" />
+                                </Style>
+                            </Ellipse.Style>
+                        </Ellipse>
+                    </Canvas>
+                    <TextBlock DockPanel.Dock="Right" Margin="0, 4, 4, 4" Text="N/A" FontWeight="Bold" VerticalAlignment="Center" />
+                    <Canvas DockPanel.Dock="Right" Margin="4, 4, 0, 4" Width="24" Height="24">
+                        <Ellipse>
+                            <Ellipse.Style>
+                                <Style TargetType="{x:Type Ellipse}">
+                                    <Setter Property="Fill">
+                                        <Setter.Value>
+                                            <RadialGradientBrush GradientOrigin=".5,.8" RadiusX="0.6">
+                                                <GradientStop Color="#FF6A5500" Offset="1" />
+                                                <GradientStop Color="#FFFFC500" Offset="0" />
+                                            </RadialGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Height" Value="24" />
+                                    <Setter Property="Width" Value="24" />
+                                </Style>
+                            </Ellipse.Style>
+                        </Ellipse>
+                        <Ellipse Canvas.Left="3" Canvas.Top="1">
+                            <Ellipse.Style>
+                                <Style TargetType="{x:Type Ellipse}">
+                                    <Setter Property="Fill">
+                                        <Setter.Value>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                <GradientStop Color="#FFFFFFFF" Offset="0" />
+                                                <GradientStop Color="#00000000" Offset="1" />
+                                            </LinearGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Height" Value="15" />
+                                    <Setter Property="Width" Value="18" />
+                                </Style>
+                            </Ellipse.Style>
+                        </Ellipse>
+                    </Canvas>
+                    <TextBlock DockPanel.Dock="Right" Margin="0, 4, 4, 4" Text="Good" FontWeight="Bold" VerticalAlignment="Center" />
+                    <Canvas DockPanel.Dock="Right" Margin="4, 4, 0, 4" Width="24" Height="24">
+                        <Ellipse>
+                            <Ellipse.Style>
+                                <Style TargetType="{x:Type Ellipse}">
+                                    <Setter Property="Fill">
+                                        <Setter.Value>
+                                            <RadialGradientBrush GradientOrigin=".5,.8" RadiusX="0.6">
+                                                <GradientStop Color="#FF005502" Offset="1" />
+                                                <GradientStop Color="#FF15D600" Offset="0" />
+                                            </RadialGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Height" Value="24" />
+                                    <Setter Property="Width" Value="24" />
+                                </Style>
+                            </Ellipse.Style>
+                        </Ellipse>
+                        <Ellipse Canvas.Left="3" Canvas.Top="1">
+                            <Ellipse.Style>
+                                <Style TargetType="{x:Type Ellipse}">
+                                    <Setter Property="Fill">
+                                        <Setter.Value>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                <GradientStop Color="#FFFFFFFF" Offset="0" />
+                                                <GradientStop Color="#00000000" Offset="1" />
+                                            </LinearGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Height" Value="15" />
+                                    <Setter Property="Width" Value="18" />
+                                </Style>
+                            </Ellipse.Style>
+                        </Ellipse>
+                    </Canvas>
+                    <TextBlock DockPanel.Dock="Right" Margin="0, 4, 32, 4" Text="Legend" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                </DockPanel>
             </Grid>
-        </DockPanel>
-        <DockPanel DockPanel.Dock="Bottom" LastChildFill="False" Margin="0">
-            <TextBlock DockPanel.Dock="Right" Margin="0, 4, 4, 4" Text="Not Good" FontWeight="Bold" VerticalAlignment="Center" />
-            <Canvas DockPanel.Dock="Right" Margin="4, 4, 0, 4" Width="24" Height="24">
-                <Ellipse>
-                    <Ellipse.Style>
-                        <Style TargetType="{x:Type Ellipse}">
-                            <Setter Property="Fill">
-                                <Setter.Value>
-                                    <RadialGradientBrush GradientOrigin=".5,.8" RadiusX="0.6">
-                                        <GradientStop Color="#FF6A0100" Offset="1" />
-                                        <GradientStop Color="#FFFF000C" Offset="0" />
-                                    </RadialGradientBrush>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="Height" Value="24" />
-                            <Setter Property="Width" Value="24" />
-                        </Style>
-                    </Ellipse.Style>
-                </Ellipse>
-                <Ellipse Canvas.Left="3" Canvas.Top="1">
-                    <Ellipse.Style>
-                        <Style TargetType="{x:Type Ellipse}">
-                            <Setter Property="Fill">
-                                <Setter.Value>
-                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                        <GradientStop Color="#FFFFFFFF" Offset="0" />
-                                        <GradientStop Color="#00000000" Offset="1" />
-                                    </LinearGradientBrush>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="Height" Value="15" />
-                            <Setter Property="Width" Value="18" />
-                        </Style>
-                    </Ellipse.Style>
-                </Ellipse>
-            </Canvas>
-            <TextBlock DockPanel.Dock="Right" Margin="0, 4, 4, 4" Text="N/A" FontWeight="Bold" VerticalAlignment="Center" />
-            <Canvas DockPanel.Dock="Right" Margin="4, 4, 0, 4" Width="24" Height="24">
-                <Ellipse>
-                    <Ellipse.Style>
-                        <Style TargetType="{x:Type Ellipse}">
-                            <Setter Property="Fill">
-                                <Setter.Value>
-                                    <RadialGradientBrush GradientOrigin=".5,.8" RadiusX="0.6">
-                                        <GradientStop Color="#FF6A5500" Offset="1" />
-                                        <GradientStop Color="#FFFFC500" Offset="0" />
-                                    </RadialGradientBrush>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="Height" Value="24" />
-                            <Setter Property="Width" Value="24" />
-                        </Style>
-                    </Ellipse.Style>
-                </Ellipse>
-                <Ellipse Canvas.Left="3" Canvas.Top="1">
-                    <Ellipse.Style>
-                        <Style TargetType="{x:Type Ellipse}">
-                            <Setter Property="Fill">
-                                <Setter.Value>
-                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                        <GradientStop Color="#FFFFFFFF" Offset="0" />
-                                        <GradientStop Color="#00000000" Offset="1" />
-                                    </LinearGradientBrush>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="Height" Value="15" />
-                            <Setter Property="Width" Value="18" />
-                        </Style>
-                    </Ellipse.Style>
-                </Ellipse>
-            </Canvas>
-            <TextBlock DockPanel.Dock="Right" Margin="0, 4, 4, 4" Text="Good" FontWeight="Bold" VerticalAlignment="Center" />
-            <Canvas DockPanel.Dock="Right" Margin="4, 4, 0, 4" Width="24" Height="24">
-                <Ellipse>
-                    <Ellipse.Style>
-                        <Style TargetType="{x:Type Ellipse}">
-                            <Setter Property="Fill">
-                                <Setter.Value>
-                                    <RadialGradientBrush GradientOrigin=".5,.8" RadiusX="0.6">
-                                        <GradientStop Color="#FF005502" Offset="1" />
-                                        <GradientStop Color="#FF15D600" Offset="0" />
-                                    </RadialGradientBrush>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="Height" Value="24" />
-                            <Setter Property="Width" Value="24" />
-                        </Style>
-                    </Ellipse.Style>
-                </Ellipse>
-                <Ellipse Canvas.Left="3" Canvas.Top="1">
-                    <Ellipse.Style>
-                        <Style TargetType="{x:Type Ellipse}">
-                            <Setter Property="Fill">
-                                <Setter.Value>
-                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                        <GradientStop Color="#FFFFFFFF" Offset="0" />
-                                        <GradientStop Color="#00000000" Offset="1" />
-                                    </LinearGradientBrush>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="Height" Value="15" />
-                            <Setter Property="Width" Value="18" />
-                        </Style>
-                    </Ellipse.Style>
-                </Ellipse>
-            </Canvas>
         </DockPanel>
         <Grid DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
