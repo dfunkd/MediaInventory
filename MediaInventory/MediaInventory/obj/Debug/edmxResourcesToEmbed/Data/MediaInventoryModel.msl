@@ -127,9 +127,10 @@
     <EntitySetMapping Name="Recipes">
       <EntityTypeMapping TypeName="MediaInventoryModel.Recipe">
         <MappingFragment StoreEntitySet="Recipes">
-          <ScalarProperty Name="CookTimeMinutes" ColumnName="CookTimeMinutes" />
-          <ScalarProperty Name="PrepTimeMinutes" ColumnName="PrepTimeMinutes" />
-          <ScalarProperty Name="recRecipeAcquiredFrom" ColumnName="recRecipeAcquiredFrom" />
+          <ScalarProperty Name="Servings" ColumnName="recServings" />
+          <ScalarProperty Name="CookTimeMinutes" ColumnName="recCookTimeMinutes" />
+          <ScalarProperty Name="PrepTimeMinutes" ColumnName="recPrepTimeMinutes" />
+          <ScalarProperty Name="RecipeAcquiredFrom" ColumnName="recRecipeAcquiredFrom" />
           <ScalarProperty Name="Valuation" ColumnName="recValuation" />
           <ScalarProperty Name="Directions" ColumnName="recDirections" />
           <ScalarProperty Name="Image" ColumnName="recImage" />

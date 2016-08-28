@@ -102,8 +102,9 @@
     <Property Name="recDirections" Type="nvarchar(max)" Nullable="false" />
     <Property Name="recValuation" Type="bit" />
     <Property Name="recRecipeAcquiredFrom" Type="nvarchar(max)" />
-    <Property Name="PrepTimeMinutes" Type="int" />
-    <Property Name="CookTimeMinutes" Type="int" />
+    <Property Name="recPrepTimeMinutes" Type="int" />
+    <Property Name="recCookTimeMinutes" Type="int" />
+    <Property Name="recServings" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="SecurityQuestion">
     <Key>
