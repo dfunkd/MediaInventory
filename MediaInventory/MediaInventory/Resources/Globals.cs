@@ -24,6 +24,7 @@ namespace MediaInventory.Resources
         private InventoryTypes _inventoryType = InventoryTypes.None;
         private PageTypes _pageType = PageTypes.None;
         private Customer _selectedCustomer = null;
+        private Ingredient _selectedIngredient = null;
         private Movie _selectedMovie = null;
         private MovieGroupHeaderTypes _movieGroupHeaderType = MovieGroupHeaderTypes.None;
         private Recipe _selectedRecipe = null;
@@ -166,6 +167,18 @@ namespace MediaInventory.Resources
                 {
                     _selectedCustomer = value;
                     RaisePropertyChanged("SelectedCustomer");
+                }
+            }
+        }
+        public Ingredient SelectedIngredient
+        {
+            get { return _selectedIngredient; }
+            set
+            {
+                if (_selectedIngredient != value)
+                {
+                    _selectedIngredient = value;
+                    RaisePropertyChanged("SelectedIngredient");
                 }
             }
         }

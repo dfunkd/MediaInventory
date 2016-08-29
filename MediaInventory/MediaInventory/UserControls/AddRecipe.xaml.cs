@@ -1,4 +1,6 @@
 ﻿using MediaInventory.Data;
+using MediaInventory.Resources;
+using MediaInventory.Windows;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,7 @@ namespace MediaInventory.UserControls
         public RadialGradientBrush ValuationFill = new RadialGradientBrush();
         private bool _isValidOrNullUrl = true;
         private bool _isValidRecipeName = false;
+        private bool newIngredientCancelled = false;
         #region Dependency Properties
         #region Items Needed To Save New Recipe
         #region NewRecipe
@@ -163,10 +166,59 @@ namespace MediaInventory.UserControls
         #endregion
         #endregion
         #region Routed Commands
+        #region AddNewIngredient
+        public static RoutedUICommand AddNewIngredient = new RoutedUICommand("New Ingredient", "AddNewIngredient", typeof(AddRecipe));
+        private void AddNewIngredientExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            var newIngredient = new NewIngredient();
+            newIngredient.Owner = Application.Current.MainWindow;
+            var result = newIngredient.ShowDialog();
+            if (result.HasValue || result == false)
+            {
+                e.Handled = true;
+                newIngredientCancelled = true;
+                (sender as RadioButton).IsChecked = false;
+            }
+            else
+            {
+                Helpers.InventoryWindow.InventoryEntity.SaveChanges();
+                //RefreshCollectionView();
+                e.Handled = true;
+            }
+        }
+        private void CanAddNewIngredient(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        #endregion
         #region AddNewRecipe
         public static RoutedUICommand AddNewRecipe = new RoutedUICommand("Add Recipe", "AddRecipe", typeof(AddRecipe));
         private void AddNewRecipeExecuted(object sender, ExecutedRoutedEventArgs e)
         {
+            using (var trans = Helpers.InventoryWindow.InventoryEntity.Database.BeginTransaction())
+            {
+                try
+                {
+                    var newRecipe = new Recipe
+                    {
+                        CookTimeMinutes = null,
+                        Description = "txtDescription",
+                        
+                    };
+                    //Add Recipe Item
+                    //Calculate Ingredient and Measurement IDs
+                    //Add Recipe2Ingredient2Measurement Item
+                    Helpers.InventoryWindow.InventoryEntity.Recipes.Add(newRecipe);
+                    Helpers.InventoryWindow.InventoryEntity.SaveChanges();
+                    txtSearchCriteria.txtContent.Text = string.Empty;
+                    trans.Commit();
+                }
+                catch (Exception ex)
+                {
+                    trans.Rollback();
+                    MessageBox.Show(string.Format("There was an error.{0}{1}", Environment.NewLine, ex.Message), "Database Chages Rolled Back", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
         private void CanAddNewRecipe(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -181,6 +233,9 @@ namespace MediaInventory.UserControls
         private void AddRecipeIngredientExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             RecipeIngredientList.Add(new RecipeIngredient(Quantity.Value, SelectedMeasurement, SelectedIngredient));
+            txtQuantity.txtContent.Text = string.Empty;
+            cboIngredient.SelectedIndex = -1;
+            cboMeasurement.SelectedIndex = -1;
         }
         private void CanAddRecipeIngredient(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -257,6 +312,8 @@ namespace MediaInventory.UserControls
             }));
             #endregion DemoData
 
+            txtDescription.txtContent.TextWrapping = TextWrapping.Wrap;
+            txtDirections.txtContent.TextWrapping = TextWrapping.Wrap;
             Loaded += (s, e) =>
             {
                 ChangeRecipeImage(@"/MediaInventory;component/Resources/Images/no_photo.jpg");
@@ -265,15 +322,6 @@ namespace MediaInventory.UserControls
                 ValuationFill.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF6A5500"), 1));
                 ValuationFill.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FFFFC500"), 0));
                 ellValuation.Fill = ValuationFill;
-            };
-            txtSearchCriteria.txtContent.TextChanged += (s, e) =>
-            {
-                var searchCriteria = (e.Source as TextBox).Text;
-                _isValidRecipeName = DataHelper.Default.Entity.Recipes.Where(w => w.Name.ToLower() == searchCriteria.ToLower()).FirstOrDefault() == null && !string.IsNullOrWhiteSpace(searchCriteria);
-                if (!string.IsNullOrWhiteSpace(searchCriteria) && DataHelper.Default.Entity.Recipes.Where(w => w.Name == searchCriteria).FirstOrDefault() == null)
-                    txtSearchCriteria.Background = ((Brush)(new BrushConverter()).ConvertFromString("#00FF0000"));
-                else
-                    txtSearchCriteria.Background = ((Brush)(new BrushConverter()).ConvertFromString("#FFFF0000"));
             };
             txtAquiredFromUrl.txtContent.TextChanged += (s, e) =>
             {
@@ -285,6 +333,25 @@ namespace MediaInventory.UserControls
                 else
                     txtAquiredFromUrl.Background = ((Brush)(new BrushConverter()).ConvertFromString("#FFFF0000"));
             };
+            txtCookTime.txtContent.TextChanged += (s, e) => CalculateTotalTime();
+            txtPrepTime.txtContent.TextChanged += (s, e) => CalculateTotalTime();
+            txtQuantity.txtContent.TextChanged += (s, e) =>
+            {
+                decimal qty;
+                Quantity = null;
+                if (decimal.TryParse(txtQuantity.txtContent.Text, out qty))
+                    Quantity = qty;
+            };
+            txtSearchCriteria.txtContent.TextChanged += (s, e) =>
+            {
+                var searchCriteria = (e.Source as TextBox).Text;
+                _isValidRecipeName = DataHelper.Default.Entity.Recipes.Where(w => w.Name.ToLower() == searchCriteria.ToLower()).FirstOrDefault() == null && !string.IsNullOrWhiteSpace(searchCriteria);
+                if (!string.IsNullOrWhiteSpace(searchCriteria) && DataHelper.Default.Entity.Recipes.Where(w => w.Name == searchCriteria).FirstOrDefault() == null)
+                    txtSearchCriteria.Background = ((Brush)(new BrushConverter()).ConvertFromString("#00FF0000"));
+                else
+                    txtSearchCriteria.Background = ((Brush)(new BrushConverter()).ConvertFromString("#FFFF0000"));
+            };
+            
         }
         #region Events
         private void cboIngredient_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -340,30 +407,29 @@ namespace MediaInventory.UserControls
         {
             CalculateTotalTime();
         }
-        private void OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            CalculateTotalTime();
-        }
-        private void txtQuantity_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            decimal qty;
-            Quantity = null;
-            if (decimal.TryParse(txtQuantity.Text, out qty))
-                Quantity = qty;
-        }
         #endregion
         #region Private Methods
         private void CalculateTotalTime()
         {
             int prepTime, cookTime;
-            if (!int.TryParse(txtPrepTime.Text, out prepTime))
+            if (!int.TryParse(txtPrepTime.txtContent.Text, out prepTime))
                 prepTime = 0;
-            if (!int.TryParse(txtCookTime.Text, out cookTime))
+            if (!int.TryParse(txtCookTime.txtContent.Text, out cookTime))
                 cookTime = 0;
             if (rdoPrepHours.IsChecked.Value)
+            {
                 prepTime = prepTime * 60;
+                txtPrepTime.HeaderText = "Hrs...";
+            }
+            else
+                txtPrepTime.HeaderText = "Mins...";
             if (rdoCookHours.IsChecked.Value)
+            {
                 cookTime = cookTime * 60;
+                txtCookTime.HeaderText = "Hrs...";
+            }
+            else
+                txtCookTime.HeaderText = "Mins...";
             var totalTime = prepTime + cookTime;
             var ts = TimeSpan.FromMinutes(totalTime);
             string dayString = string.Empty, hourString = string.Empty, minuteString = string.Empty;

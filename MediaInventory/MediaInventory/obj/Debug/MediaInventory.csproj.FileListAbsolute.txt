@@ -410,3 +410,5 @@ C:\GitRepo\MediaInventory\MediaInventory\MediaInventory\obj\Debug\MediaInventory
 C:\GitRepo\MediaInventory\MediaInventory\MediaInventory\obj\Debug\MediaInventory.exe
 C:\GitRepo\MediaInventory\MediaInventory\MediaInventory\obj\Debug\MediaInventory.pdb
 C:\GitRepo\MediaInventory\MediaInventory\MediaInventory\obj\Debug\MediaInventory.csprojResolveAssemblyReference.cache
+C:\GitRepo\MediaInventory\MediaInventory\MediaInventory\obj\Debug\Windows\NewIngredient.g.cs
+C:\GitRepo\MediaInventory\MediaInventory\MediaInventory\obj\Debug\Windows\NewIngredient.baml
